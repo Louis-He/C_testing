@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Hello, C!</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+        <a class="navbar-brand" href="/">Hello, C!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/syllabus">Syllabus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cookbook_index">CookBook!</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main" style="margin-top: 100px">
+
+        <div class="container">
+            <h2 class="text">Testing Result</h2>
+            <h3 class="text" style="margin-top: 20px">Summary: <span style="color: #00cc00">{{ pass_rate }}%
+                    passed.</span> </h3>
+            <div>
+                <span style="color: #00cc00">{{ passed }} case(s) passed.</span> <span
+                    style="color: #DD0000">{{ failed }} case(s) failed.</span>
+            </div>
+            <hr style="margin-top: 20px; margin-bottom: 20px">
+            <div class="row">
+                {% for result in results %}
+                {% if result == 0 %}
+                <div style="height: 5%; padding-top: 2%; padding-bottom: 2%; border-color: seashell; border-style: solid; background-color: black; color: white"
+                    class="col-2">
+                    Case # {{ forloop.counter }}: IE
+                </div>
+                {% elif result == -1 %}
+                <div style="height: 5%; padding-top: 2%; padding-bottom: 2%; border-color: seashell; border-style: solid; background-color: #DD0000; color: white; font-weight: bold"
+                    class="col-2">
+                    Case # {{ forloop.counter }}: WA
+                </div>
+                {% else %}
+                <div style="height: 5%; padding-top: 2%; padding-bottom: 2%; border-color: seashell; border-style: solid; background-color: #00cc00; color: black"
+                    class="col-2">
+                    Case # {{ forloop.counter }}: CA
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <p style="margin-top: 50px; margin-bottom: 50px"><a class="btn btn-primary" href="/" role="button">Back to
+                    homepage »</a></p>
+        </div>
+
+    </main>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

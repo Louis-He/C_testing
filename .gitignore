@@ -1,3 +1,5 @@
 .vscode
 output.out
 test.exe
+server/testingsite/__pycache__/
+server/testingsite/tests/__pycache__/

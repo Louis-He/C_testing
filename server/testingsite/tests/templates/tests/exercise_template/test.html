@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Hello, C!</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="/">Hello, C!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/syllabus">Syllabus</a>
+          </li>
+        </ul>
+      </div>
+</nav>
+
+<main role="main" style="margin-top: 100px">
+
+    <div class="container">
+
+        {% if exercise_id == 1 %}
+        <div style="font-family: Arial,sans-serif">
+            <h2 class="text" style="text-align: center;">Exercise 2 - Mad about time</h2>
+            <h3>Brief Introduction</h3>
+            <p>
+              In this exercise, you will learn how to process input, output, various statements like if and for, and functions
+              using programming languages C.
+            </p>
+            <h3>Instruction</h3>
+            <p>
+              This is the second exercise of this lecture series, the instruction is similar to exercise #1. Please follow the
+              instruction carefully to procceed.<br />
+              <div style="margin-left: 30px;">
+                  1. Download and decompress the code skeleton of exercise #2 (Please select according to your operating system).<br />
+                  2. Implement your code in sample.c. Please do not edit any other files.<br />
+                  3. After you test your code locally, now it is time to test your code using online tester.
+                  Download Input file in Step 2 and store the file with name <code>input.in</code>. Move the input file to the same
+                  directory that has the skeleton code that you decompressed in 1.<br />
+                  4.1 If you are a mac user, please enter the directory in terminal, and run <kbd>sh compile.sh</kbd>.<br />
+                  4.2 If you are a windows user, please enter the directory in powershell, and run <kbd>powershell.exe compile.ps1</kbd>.<br />
+                  5. <code>compile.sh</code> and <code>compile.ps1</code> will do everything for you and generate an output file <code>output.out</code>.<br />
+                  6. Do not edit output file, submit your input.in and output.out to the online tester in step 3.<br />
+              </div>
+              <div style="margin-top: 20px">
+              <a
+                class="btn btn-primary"
+                href="/skeleton/2/mac"
+                role="button"
+                target="view_window"
+                >MacOS</a
+              >
+              <a
+                class="btn btn-primary"
+                href="/skeleton/2/win"
+                role="button"
+                target="view_window"
+                >Windows</a
+              >
+              </div>
+            </p>
+
+            <h3>Input</h3>
+            <p>The input will be two datetime. Each datetime is represented by 6 integers. <br>
+                <code>2020 7 8 12 4 8 // year 2020, July, 8th, 12:04:08</code><br>
+                In a nutshell, for each cases, you will have a total of 12 integer inputs.<br>
+                <span style="font-weight: bold">Note:</span> The input will be some time later than Jan, 1st, 1970, midnight. However, there is no guarantee that the input is always correct.
+                The only thing you know is that there will be a total of 12 integer inputs.
+            </p>
+
+            <h3>Part I Outupt</h3>
+            <p>The output should be two int that represents how many seconds the datetime away from Jan, 1st, 1970, midnight.<br>
+                <code>1234213\n</code><br>
+                <code>1321432\n</code><br>
+                <span style="font-weight: bold">Note:</span> If the input is invalid, the output should be <code>-1\n</code>.
+            </p>
+
+            <h3>Part I Example</h3>
+            <pre><code>
+                Input:
+                1970 1 1 0 0 1
+                1970 1 1 1 0 0
+                Output:
+                1\n
+                3600\n
+
+                Input:
+                1970 1 1 0 0 0
+                2020 2 30 0 0 0
+                Output:
+                0\n
+                -1\n
+            </code></pre>
+
+            <hr>
+            <p>
+                Part II establishes upon part I. Now instead of output two integers, you should output the time difference between two datetime. The output should be a string.
+                Do not delete the functions you wrote in part I, continue adding more code and complete this part.
+            </p>
+
+            <h3>Part II Outupt</h3>
+            <p>The output should be a string that represents the time difference between two datetime: "dd Day(s), hh Hour(s), mm Minute(s), ss Second(s)".<br>
+                <code>01 day, 23 hours, 45 minutes, 01 second\n</code><br>
+                <span style="font-weight: bold">Note1:</span> You always need to output at least two digits for days, hours, minutes and seconds. If the value is less than 10, you need to pad zero in front of it.
+                (e.g: 1 days, 2 hours, 3 minutes, 4 seconds -> 01 day, 02 hours, 03 minutes, 04 seconds)<br>
+                <span style="font-weight: bold">Note2:</span> Be careful about singular and plural form.<br>
+                <span style="font-weight: bold">Note3:</span> If the input is invalid, the output should be <code>Error: invalid inputs\n</code>.
+            </p>
+
+            <h3>Part II Example</h3>
+            <pre><code>
+                Input:
+                2020 7 8 1 7 0
+                2020 7 8 2 7 1
+                Output:
+                00 days, 01 hour, 00 minutes, 01 second\n
+
+                Input:
+                1970 1 1 0 0 0
+                2020 2 30 0 0 0
+                Output:
+                Error: invalid inputs\n // There is no date 30 in Feb
+            </code></pre>
+            <hr style="margin-top: 20px; margin-bottom: 20px">
+        </div>
+        {% endif %}
+
+        <h2 class="text">Step 1 - Take your time, and implement your code</h2>
+        <h2 class="text" style="margin-top: 30px;">Step 2 - generate input file</h2>
+        <div class="alert alert-warning" role="alert">
+          You will get <span style="font-weight: bold;">different</span> input
+          files every time.
+        </div>
+        <a
+          class="btn btn-primary"
+          href="/input/input_{{ exercise_id }}.in"
+          role="button"
+          target="view_window"
+          >Generate</a
+        >
+        <p></p>
+
+        <h2 class="text" style="margin-top: 30px;">
+          Step 3 - Upload your corresponding input file and output file
+        </h2>
+        <form
+          action="/exercise/{{ exercise_id }}"
+          method="post"
+          enctype="multipart/form-data"
+          style="margin-bottom: 10%"
+        >
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="input_id">Upload your input file</label>
+            <input
+              type="file"
+              class="form-control-file"
+              id="input_id"
+              name="in_file"
+            />
+          </div>
+          <div class="form-group">
+            <label for="output_id">Upload your corresponding output file</label>
+            <input
+              type="file"
+              class="form-control-file"
+              id="output_id"
+              name="out_file"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="margin-top: 20px">Submit</button>
+        </form>
+    </div>
+
+</main>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+</html>

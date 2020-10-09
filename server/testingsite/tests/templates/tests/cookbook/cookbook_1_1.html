@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+  <title>Hello, C!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="/">Hello, C!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/syllabus">Syllabus</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/cookbook_index">CookBook! <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" style="margin-top: 40px; margin-bottom: 10%;">
+    <div style="margin: 5%">
+      <div class="row">
+        <div class="col-2">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical"
+            style="position: fixed;">
+            <a class="nav-link" href="/cookbook_index">Home</a>
+            <a class="nav-link" href="/cookbook_1_1">Hello World</a>
+            <a class="nav-link active" href="/cookbook_1_1">&nbsp;&nbsp;&nbsp;&nbsp;Start</a>
+            <a class="nav-link" href="/cookbook_1_2">&nbsp;&nbsp;&nbsp;&nbsp;First program</a>
+            <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
+          </div>
+        </div>
+        <div class="col-10">
+          <div class="tab-content">
+            <h4>Before we start coding... We need to setup our environment!</h4>
+            <h5>[❔ Choose here] I am now using a ...</h5>
+            <ul class="nav nav-tabs" id="before_start_tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#mac" role="tab" aria-controls="mac"
+                  aria-selected="true">Mac</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#windows" role="tab"
+                  aria-controls="windows" aria-selected="false">Windows</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="mac" role="tabpanel" aria-labelledby="home-tab">
+                <div style="margin: 10px">
+                  Before you start, go and open the terminal (dashboard -> utility -> terminal)<br>
+                  You should see a terminal window like the one from movies. There will be input prompt like the
+                  following:
+                  <div style="margin: 10px;">
+                    <pre><code class="Bash">LouisHe@MacBook-Pro ~ %</code></pre>
+                  </div>
+                  Now type g++ and enter.
+                  <div style="margin: 10px;">
+                    <pre><code>LouisHe@MacBook-Pro ~ % g++
+g++: fatal error: no input files
+compilation terminated.</code></pre>
+                  </div>
+                  If you see this, then you don't have to do anything else. Otherwise, you need to run the following.
+                  The command is used to install the C & C++ compiler. You may need to enter your mac password.
+                  Please follow the intructions of the popup window to install it.
+                  <div style="margin: 10px;" class="Bash">
+                    <pre><code>LouisHe@MacBook-Pro ~ % sudo xcode-select install</code></pre>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="windows" role="tabpanel" aria-labelledby="profile-tab">
+                More to come...
+              </div>
+            </div>
+
+            <h4>What did I just do?</h4>
+            <p>
+              You may wonder what I was doing? Why I need to install a compiler(?)? What does that even mean?
+            </p>
+            <p>
+              Basically, a <span style="font-weight: bold;">compiler</span> is a program that converts the code that
+              human writes (human readable but not machine executable) to a binary file that is machine executable
+              (machine code). The binary file is consists of purely 0s & 1s. That is why the programming language we
+              learn today are mostly called high level languages. The code we write cannot be
+              run by machine directly without being "translated" to machine code.
+            </p>
+            <p>
+              Extra reference: you may find this youtube video interesting: <a
+                href="https://www.youtube.com/watch?v=QXjU9qTsYCc&ab_channel=FrameofEssence">How do computers read
+                code?</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- /container -->
+  </main>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+
+</html>

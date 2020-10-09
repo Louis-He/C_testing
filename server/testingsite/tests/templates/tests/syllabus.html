@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+
+  <title>Hello, C!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="/">Hello, C!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/syllabus">Syllabus <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/cookbook_index">CookBook!</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" style="margin-top: 100px; font-family: Arial,sans-serif">
+    <div class="container">
+      <h2 class="text" style="text-align: center;">Syllabus</h2>
+      <div style="margin-top: 20px">
+        <h3 class="text">Introduction</h3>
+        <p>
+          Welcome! The goal of this course is to give you a basic idea of programming. The main content of this course
+          will be programming language C.
+          The course will also introduce Python at the end of the course. The enrolment of this class is around 40
+          people now. The lectures will be delivered
+          through zoom meeting. More instructions will be announced later.
+        </p>
+      </div>
+      <div style="margin-top: 20px">
+        <h3 class="text">Tutor</h3>
+        <p>
+          Course tutor: Louis He<br>
+          Email: siwei.he@mail.utoronto.ca<br>
+          Github: <a href="https://github.com/Louis-He">https://github.com/Louis-He</a>
+        </p>
+      </div>
+      <div style="margin-top: 20px">
+        <h3 class="text">Course Website</h3>
+        <p>
+          <a href="http://ctest.siweihe.tech">http://ctest.siweihe.tech</a>
+        </p>
+      </div>
+      <div style="margin-top: 20px">
+        <h3 class="text">Course Schedule</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Lecture Week</th>
+              <th scope="col">Time</th>
+              <th scope="col">Content</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Week 1</th>
+              <td>8:30 ~ 10:30 P.M. EDT<br>July 17th</td>
+              <td>Install programming environment on Windows & mac. Pick an IDE.<br>Basic programming knowledge: header
+                file, variable, function, operators.</td>
+            </tr>
+            <tr>
+              <th scope="row">Week 2</th>
+              <td>8:30 ~ 10:30 P.M. EDT<br>July 24th (might adjust)</td>
+              <td>User Prompt: printf, scanf.<br>Different Statements: if, case, for, while.</td>
+            </tr>
+            <tr>
+              <th scope="row">Week 3</th>
+              <td>TBD</td>
+              <td>Address and pointer.<br>Array and memory dynamic allocation.<br>Passing by value vs. passing by
+                pointer.</td>
+            </tr>
+            <tr>
+              <th scope="row">Week 4</th>
+              <td>TBD</td>
+              <td>Recursion.<br>Struct, typedef.<br>Tree(optional).</td>
+            </tr>
+            <tr>
+              <th scope="row">Week 5 (TBD)</th>
+              <td>TBD</td>
+              <td>Linked List.<br>Python and more.</td>
+            </tr>
+            <tr>
+              <th scope="row">Week 6 (TBD)</th>
+              <td>TBD</td>
+              <td>Python and more.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top: 20px;">
+        <h3 class="text">Lab Exercise</h3>
+        <p>
+          There will be one lab exercise every time after the lecture. You can check all the lab exercises using the
+          link below.
+        </p>
+        <ul>
+          <li>
+            <a href="http://ctest.siweihe.tech/exercise/1">Lab Exercise 1</a>
+          </li>
+          <li>
+            <a href="http://ctest.siweihe.tech/exercise/2">Lab Exercise 2</a>
+          </li>
+        </ul>
+      </div>
+      <div style="margin-top: 20px; margin-bottom: 8%">
+        <h3 class="text">Reward</h3>
+        <p>
+          You can reward me if you like =) Scan the QR code below to support me, thank you!
+        </p>
+        <img class="img-fluid" style="max-width: 200px; height: auto; margin-bottom: 8%;"
+          src="{% static "/tests/wechat_pay.jpg" %}" alt="Hi!" />
+      </div>
+    </div>
+    <!-- /container -->
+  </main>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

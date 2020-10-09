@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+  <title>Hello, C!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="/">Hello, C!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/syllabus">Syllabus</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/cookbook_index">CookBook! <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" style="margin-top: 40px; margin-bottom: 10%;">
+    <div style="margin: 5%">
+      <div class="row">
+        <div class="col-2">
+          <div class="nav nav-fill flex-column nav-pills" role="tablist" aria-orientation="vertical"
+            style="position: fixed;">
+            <a class="nav-link" href="/cookbook_index">Home</a>
+            <a class="nav-link" href="/cookbook_1_1">Hello World</a>
+            <a class="nav-link" href="/cookbook_1_1">&nbsp;&nbsp;&nbsp;&nbsp;Start</a>
+            <a class="nav-link active" href="/cookbook_1_2">&nbsp;&nbsp;&nbsp;&nbsp;First program</a>
+            <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
+          </div>
+        </div>
+        <div class="col-10">
+          <div class="tab-content">
+            <h4>My first program</h4>
+
+            <p>
+              You can type the following code to a new source code file or copy & paste. I encourage typing the code
+              word by word. Also you can use <a href="https://www.onlinegdb.com/">onlinegdb</a> (do not forget to choose
+              C/C++14 in language option) for convenience.
+            </p>
+
+            <ul class="nav nav-tabs" id="hello_world_tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="hello_world_c_tab" data-toggle="tab" href="#helloc" role="tab"
+                  aria-controls="C" aria-selected="true">C</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="hello_world_cpp_tab" data-toggle="tab" href="#hellocpp" role="tab"
+                  aria-controls="C++" aria-selected="false">C++</a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="helloc" role="tabpanel" aria-labelledby="helloc-tab">
+                <div style="margin: 10px;">
+                  <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+  printf("Hello World\n");
+  return 0;
+}
+</code></pre>
+                </div>
+                <h5>Summary</h5>
+                <p>The program will print "Hello World" to the terminal</p>
+
+                <hr>
+
+                <h5>More details!</h5>
+                <p>
+                  Let's take a minute to understand what we just wrote. It's okay that you can't understand what I will
+                  tell you in a minute at this point...
+                </p>
+                <p>
+                  Line #1 <code>#include &lt;stdio.h&gt;</code> is used to include a library that let you to call
+                  <code>printf</code> on line#4.
+                </p>
+                <p>
+                  Line #3 & Line #6 are the beginning and the end of the main function of your program. The program will
+                  start execution from <code>main()</code>.
+                </p>
+                <p>
+                  Line #4 is the only line that actually does something that you can observe. This line will print
+                  "Hello World" to the terminal. What does "\n" do? It is the special character means a new line.
+                </p>
+              </div>
+              <div class="tab-pane fade" id="hellocpp" role="tabpanel" aria-labelledby="hellocpp-tab">
+                <div style="margin: 10px;">
+                  <pre><code>#include &lt;iostream&gt;
+
+int main(){
+  std::cout &lt;&lt; "Hello World" &lt;&lt; std::endl;
+  return 0;
+}
+</code></pre>
+                </div>
+
+                <h5>Summary</h5>
+                <p>The program will print "Hello World" to the terminal</p>
+
+                <hr>
+
+                <h5>More details!</h5>
+                <p>
+                  Let's take a minute to understand what we just wrote. It's okay that you can't understand what I
+                  will
+                  tell you in a minute at this point...
+                </p>
+                <p>
+                  Line #1 <code>#include &lt;iostream&gt;</code> is used to include a library that let you to call
+                  <code>cout</code> on line#4.
+                </p>
+                <p>
+                  Line #3 & Line #6 are the beginning and the end of the main function of your program. The program
+                  will
+                  start execution from <code>main()</code>.
+                </p>
+                <p>
+                  Line #4 is the only line that actually does something that you can observe. This line will print
+                  "Hello World" to the terminal. What does "endl" do? It means a new line.<br>
+                  Then what is that strange "std::" before cout and endl?<br>
+                  Here, "std" is a <a href="https://en.cppreference.com/w/cpp/language/namespace">namespace</a>. More
+                  details can be found by this link. To be short, it is like a local code.<br>
+                  For example, there are two classrooms in a school, both have a student whose id is #2020. Then we may
+                  distinguish them by calling them "Class A - student 2020", and "Class B - student 2020" respectively.
+                  Here, "Class A" and "Class B" can be seen as two namespaces. "student 2020" is only meaningful within
+                  that namespace. If you want to express these two students in C++, you can write them as
+                  <code>Class_A::sutdent_2020</code> and <code>Class_B::student_2020</code>.
+                </p>
+              </div>
+            </div>
+
+            <hr>
+            <h5>Exercise</h5>
+            <h6>#1 Print a tree!</h6>
+            <h6 style="color:gray;">Sample Input</h6>
+            <p>No any input =)</p>
+            <h6 style="color:gray;">Sample Output</h6>
+            <pre><code>   #   
+  ###  
+ #####
+#######</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- /container -->
+  </main>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+
+</html>
