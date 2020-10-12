@@ -35,20 +35,22 @@
     </div>
   </nav>
 
-  <main role="main" style="margin-top: 40px; margin-bottom: 10%;">
-    <div style="margin: 5%">
+  <main role="main" style="margin-top: 80px; margin-bottom: 10%;">
+    <div style="margin: 50px">
       <div class="row">
-        <div class="col-2">
-          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical"
-            style="position: fixed;">
-            <a class="nav-link" href="/cookbook_index">Home</a>
-            <a class="nav-link" href="/cookbook_1_1">Hello World</a>
-            <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
-            <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
-            <a class="nav-link active" href="/cookbook_3_1">&nbsp;&nbsp;&nbsp;&nbsp;Introduction</a>
-            <a class="nav-link" href="/cookbook_4_1">Objects</a>
+        <div class="col-2" style="position: fixed;">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <div>
+              <a class="nav-link" href="/cookbook_index">Home</a>
+              <a class="nav-link" href="/cookbook_1_1">Hello World</a>
+              <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
+              <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
+              <a class="nav-link active" href="/cookbook_3_1">&nbsp;&nbsp;&nbsp;&nbsp;Introduction</a>
+              <a class="nav-link" href="/cookbook_4_1">Objects</a>
+            </div>
           </div>
         </div>
+        <div class="col-2" style="visibility: hidden;"></div>
         <div class="col-10">
           <div class="tab-content">
             <h4>Introduction</h4>
@@ -147,9 +149,9 @@ int main(){
               <div class="tab-pane fade" id="step2" role="tabpanel" aria-labelledby="step2-tab">
                 <div class="row">
                   <div class="col-9">
-                    After we finished line 1 of our main function, we declared a variable <code>a</code>, and assign 0
+                    After we finished line 1 of our main function, we declare a variable <code>a</code>, and assign 0
                     to
-                    it. In the memory, our program find a place where nobody is used and store the value 0.
+                    it. In the memory, our program finds a place where nobody is used and stores the value 0.
                   </div>
                   <div class="col-3">
                     <p style="text-align: center;">Memory Space</p>
@@ -167,8 +169,8 @@ int main(){
               <div class="tab-pane fade" id="step3" role="tabpanel" aria-labelledby="step3-tab">
                 <div class="row">
                   <div class="col-9">
-                    After we finished line 2 of our main function, we updated the value of our variable <code>a</code>
-                    from 0 to 1. In the memory, our program update the coressponding place value from 0 to 1.
+                    After we finished line 2 of our main function, we update the value of our variable <code>a</code>
+                    from 0 to 1. In the memory, our program updates the coressponding place value from 0 to 1.
                   </div>
                   <div class="col-3">
                     <p style="text-align: center;">Memory Space</p>
@@ -187,7 +189,7 @@ int main(){
                 <div class="row">
                   <div class="col-9">
                     After we finished everything in our main function, just before we return 0, all the variables we
-                    declared are no longer needed. Therefore, the memory that holds variable <code>a</code> will be
+                    declared are no longer needed. Therefore, the memory that holds variable <code>a</code> is
                     released.
                   </div>
                   <div class="col-3">
