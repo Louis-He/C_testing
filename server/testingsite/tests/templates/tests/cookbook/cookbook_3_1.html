@@ -45,11 +45,165 @@
             <a class="nav-link" href="/cookbook_1_1">Hello World</a>
             <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
             <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
+            <a class="nav-link active" href="/cookbook_3_1">&nbsp;&nbsp;&nbsp;&nbsp;Introduction</a>
             <a class="nav-link" href="/cookbook_4_1">Objects</a>
           </div>
         </div>
         <div class="col-10">
           <div class="tab-content">
+            <h4>Introduction</h4>
+            <p>
+              What actually happens when our programs are running? How these variables we declared and manipulated
+              are stored in our computer? Are they stored in memory? or on disk? When we try to assign a new value to a
+              variable (e.g. <code>a = 0;</code>), how do our program know which place in our computer needs to be
+              updated?
+            </p>
+            <p>
+              Let's tackle these problems one at a time. First, we need to know that the variables we declared,
+              and everything we manipulate during runtime of our program store in the main memory of our computer or
+              sometimes we call it <a href="https://en.wikipedia.org/wiki/Random-access_memory"
+                target="_blank">RAM(Random Access Memory)</a>. We are talking about the same thing that you may heard
+              when you bought your computer. Most of the modern computers have RAM over 4GB.
+            </p>
+            <p>
+              Now, we have a very simple program below. It first declared a variable <code>a</code>, and assign 0 to
+              <code>a</code>. Later, we change the value of <code>a</code> from 0 to 1. Let's run it line by line and
+              see what happends in the memory.
+            <ul class="nav nav-tabs" id="hello_world_tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="hello_world_c_tab" data-toggle="tab" href="#helloc" role="tab"
+                  aria-controls="C" aria-selected="true">C</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="hello_world_cpp_tab" data-toggle="tab" href="#hellocpp" role="tab"
+                  aria-controls="C++" aria-selected="false">C++</a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="helloc" role="tabpanel" aria-labelledby="helloc-tab">
+                <div style="margin: 10px;">
+                  <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+  int a = 0;
+  a = 1;
+  return 0;
+}</code></pre>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="hellocpp" role="tabpanel" aria-labelledby="hellocpp-tab">
+                <div style="margin: 10px;">
+                  <pre><code>#include &lt;iostream&gt;
+
+int main(){
+  int a = 0;
+  a = 1;
+  return 0;
+}</code></pre>
+                </div>
+              </div>
+            </div>
+
+            </p>
+
+            <ul class="nav nav-tabs" id="hello_world_tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="step1_tab" data-toggle="tab" href="#step1" role="tab"
+                  aria-controls="step1" aria-selected="true">Before Start</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="step2_tab" data-toggle="tab" href="#step2" role="tab" aria-controls="step2"
+                  aria-selected="false">Line 1</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="step3_tab" data-toggle="tab" href="#step3" role="tab" aria-controls="step3"
+                  aria-selected="false">Line 2</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="step4_tab" data-toggle="tab" href="#step4" role="tab" aria-controls="step4"
+                  aria-selected="false">All done</a>
+              </li>
+            </ul>
+
+            <div class="tab-content" style="margin-top: 10px;">
+              <div class="tab-pane fade show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
+                <div class="row">
+                  <div class="col-9">
+                    At the very beginning of our program, just before line 1 of our main function, there is no variable
+                    declared or anything*. So basically, from the perspective of our program, we haven't used any memory
+                    space.
+                  </div>
+                  <div class="col-3">
+                    <p style="text-align: center;">Memory Space</p>
+                    <div class="row" style="text-align: center;">
+                      <div class="col-5" style="border-style: solid;"> ... </div>
+                      <div class="col-7" style="border-style: solid;"> ... </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="step2" role="tabpanel" aria-labelledby="step2-tab">
+                <div class="row">
+                  <div class="col-9">
+                    After we finished line 1 of our main function, we declared a variable <code>a</code>, and assign 0
+                    to
+                    it. In the memory, our program find a place where nobody is used and store the value 0.
+                  </div>
+                  <div class="col-3">
+                    <p style="text-align: center;">Memory Space</p>
+                    <div class="row" style="text-align: center;">
+                      <div class="col-5" style="border-style: solid;"> a </div>
+                      <div class="col-7" style="border-style: solid;"> 0 </div>
+                    </div>
+                    <div class="row" style="text-align: center;">
+                      <div class="col-5" style="border-style: solid;"> ... </div>
+                      <div class="col-7" style="border-style: solid;"> ... </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="step3" role="tabpanel" aria-labelledby="step3-tab">
+                <div class="row">
+                  <div class="col-9">
+                    After we finished line 2 of our main function, we updated the value of our variable <code>a</code>
+                    from 0 to 1. In the memory, our program update the coressponding place value from 0 to 1.
+                  </div>
+                  <div class="col-3">
+                    <p style="text-align: center;">Memory Space</p>
+                    <div class="row" style="text-align: center;">
+                      <div class="col-5" style="border-style: solid;"> a </div>
+                      <div class="col-7" style="border-style: solid;"> 1 </div>
+                    </div>
+                    <div class="row" style="text-align: center;">
+                      <div class="col-5" style="border-style: solid;"> ... </div>
+                      <div class="col-7" style="border-style: solid;"> ... </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="step4" role="tabpanel" aria-labelledby="step4-tab">
+                <div class="row">
+                  <div class="col-9">
+                    After we finished everything in our main function, just before we return 0, all the variables we
+                    declared are no longer needed. Therefore, the memory that holds variable <code>a</code> will be
+                    released.
+                  </div>
+                  <div class="col-3">
+                    <p style="text-align: center;">Memory Space</p>
+                    <div class="row" style="text-align: center;">
+                      <div class="col-5" style="border-style: solid;"> ... </div>
+                      <div class="col-7" style="border-style: solid;"> ... </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div style="margin-top: 10%; font-size: small; color: darkgrey;">Note*: For the sake of simplicity, we don't
+              consider main function pointer and other strange stuff that are stored in memory at this point.</div>
 
           </div>
         </div>
