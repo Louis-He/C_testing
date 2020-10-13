@@ -57,10 +57,112 @@
               liquid. This goes the same way when we are in the programming world. All the variables have their own
               types. So, let's meet some basic types we need to know.
 
-            <pre><code>int a;
-double b;
-char c;</code></pre>
+            <pre><code>int a;     //This is a signed integer
+double b;  //This is a double type floating point
+char c;    //This is a signed character</code></pre>
             </p>
+            <p>
+              Data is stored inside the computer memory. However, different kinds of data may require different 
+              size of space to store. You know, it's just like you cannot park your car in your refrigerator. In C and 
+              C++, develpers need to tell the computer explicitly what data type they are using so that they can be stored
+              in a proper space.
+            </p>
+            <p>
+              On the other hand, different kinds of data may be used in different ways. Computer will not know what to do with 
+              the data you give to it unless you define the data type. 
+            </p>
+            <p>
+              In general, the basic data types can be divided into two categories: 
+              
+              <span style="background-color: #FFFF00">the integer type</span>
+
+              and 
+              
+              <span style="background-color: #FFFF00">the floating point type</span>
+              
+              . We will talk about them in details as followed.
+            </p>
+
+            <hr>
+
+            <h5>Integer Type</h5>
+            <p>
+              These types used to store integer data. Even though some of them may have different use, for example, a 
+              <code>char</code> can be used to represent a character, but it is stored as an integer in the memory space. 
+            </p>
+            <p>
+              The following table shows all the commonly used integer types, as well as the space each type takes 
+              and the range of integer it can store.  
+            </p>
+            <table border="1">
+              <tr>
+                  <td>Type</td>
+                  <td>Memory Space</td>
+                  <td>Range</td>
+              </tr>
+              <tr>
+                <td><code>bool</code></td>
+                <td>1 bit</td>
+                <td>0 or 1</td>
+              </tr>
+              <tr>
+                  <td><code>char</code></td>
+                  <td>1 byte</td>
+                  <td>-128 to 127</td>
+              </tr>
+              <tr>
+                <td><code>unsigned char</code></td>
+                <td>1 byte</td>
+                <td>0 to 255</td>
+              </tr>
+              <tr>
+                <td><code>int</code></td>
+                <td>4 bytes</td>
+                <td>-2,147,483,648 to 2,147,483,647</td>
+              </tr>
+              <tr>
+                <td><code>unsigned int</code></td>
+                <td>4 bytes</td>
+                <td>0 to 4,294,967,295</td>
+              </tr>
+              <tr>
+                <td><code>short</code></td>
+                <td>2 bytes</td>
+                <td>-32,768 to 32,767</td>
+              </tr>
+              <tr>
+                <td><code>unsigned short</code></td>
+                <td>2 bytes</td>
+                <td>0 to 65,535</td>
+              </tr>
+              <tr>
+                <td><code>long</code></td>
+                <td>8 bytes</td>
+                <td>-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807</td>
+              </tr>
+              <tr>
+                <td><code>unsigned long</code></td>
+                <td>8 bytes</td>
+                <td>0 to 18,446,744,073,709,551,615</td>
+              </tr>
+          </table>
+          <p></p>
+          <p>Note:</p>
+          <p>
+            The size of each type may be different under different computer architecture, or with different compilier. 
+            The table above shows the memory space under x86_64 instruction set with 
+            Linux gcc-5.3.1 compiler. At this moment, you don't have to understand what those stuffs are, you just need to 
+            have a sense that the space of given type is machine dependent.
+          </p>
+          <p>
+            To get a precise memory size of a given type, you can use <code>sizeof</code> operator. For example:
+          </p>
+          <pre><code>sizeof(int)</code></pre>
+          <p>
+            This expression will return the how many bytes an integer takes in your computer.
+          </p>
+
+          <hr>
 
           </div>
         </div>
