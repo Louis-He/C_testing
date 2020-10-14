@@ -10,6 +10,15 @@
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
   <title>Hello, C!</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 15px;
+    }
+    </style>
 </head>
 
 <body>
@@ -80,9 +89,39 @@ char c;    //This is a signed character</code></pre>
               
               <span style="background-color: #FFFF00">the floating point type</span>
               
-              . We will talk about them in details as followed.
+              . Don't worry, we will go through all the details right away.
             </p>
 
+            <hr>
+
+            <h5>Bit and Byte</h5>
+            <p>
+              Before we start talking about data type, we need to learn a little bit about 
+              how numbers are stored in a computer. 
+              
+            </p>
+            <p>
+              Instead of using decimal numbers, mordern computers are using binary numbers to store data. 
+              This simply means that a digit in a binary number can be only 0 or 1. In fact, this is 
+              what we call one <code>bit</code>: a bit is essentailly a binary 
+              digit with two possible states: 0 and 1.
+            </p>
+            <p>
+              With a sequence of bits, computer will be able to represent numbers and perform arithmetic or logic 
+              operations. However, dealing with a bunch of bits are not convenient. Conventionally, 
+              we define that a group of bits with size of 8 as one <code>byte</code>. 
+              Therefore, the relation between bit and byte is:       
+            </p>
+            <p align="center">
+              1 Byte = 8 Bits
+            </p>
+            <p>
+              Extra reference:<br> 
+              To learn why computers are using binary representations, you can watch this YouTube video: <a
+                href="https://www.youtube.com/watch?v=thrx3SBEpL8">Why Use Binary?</a> <br>
+              Or maybe you are intereted with the bit-byte relations: <a
+              href="https://www.youtube.com/watch?v=ixJCo0cyAuA&t=97s">Where did Bytes Come From?</a>
+            </p>
             <hr>
 
             <h5>Integer Type</h5>
@@ -94,11 +133,11 @@ char c;    //This is a signed character</code></pre>
               The following table shows all the commonly used integer types, as well as the space each type takes 
               and the range of integer it can store.  
             </p>
-            <table border="1">
+            <table border="1" style="width:70%">
               <tr>
-                  <td>Type</td>
-                  <td>Memory Space</td>
-                  <td>Range</td>
+                  <td><strong>Type</strong></td>
+                  <td><strong>Memory Space</strong></td>
+                  <td><strong>Range</strong></td>
               </tr>
               <tr>
                 <td><code>bool</code></td>
