@@ -87,7 +87,7 @@ char c;    //This is a signed character</code></pre>
 
               and 
               
-              <span style="background-color: #FFFF00">the floating point type</span>
+              <span style="background-color: #FFFF00">the floating type</span>
               
               . Don't worry, we will go through all the details right away.
             </p>
@@ -126,7 +126,7 @@ char c;    //This is a signed character</code></pre>
 
             <h5>Integer Type</h5>
             <p>
-              These types used to store integer data. Even though some of them may have different use, for example, a 
+              Integer type is used to store integer data. Even though some of them may have different use, for example, a 
               <code>char</code> can be used to represent a character, but it is stored as an integer in the memory space. 
             </p>
             <p>
@@ -202,6 +202,46 @@ char c;    //This is a signed character</code></pre>
           </p>
 
           <hr>
+
+          <h5>Floating Type</h5>
+          <p>
+            Integers are not suitable for all applications. Sometimes it is necessary to
+            have variables that can store numbers with digits after the decimal point. These variables 
+            are called floating type. 
+          </p>
+          <p>
+            The following table lists all the most commonly used floating types. The difference of these 
+            types is the precision of representing decimal digits. Similar to the integer type, more precise 
+            the type is, more memory space it will occupy. Note that all the floating types are signed numbers.
+          </p>
+          <table border="1" style="width:80%">
+            <tr>
+                <td><strong>Type</strong></td>
+                <td><strong>Memory Space</strong></td>
+                <td><strong>Range (Absolute value)</strong></td>
+                <td><strong>Precision</strong></td>
+            </tr>
+            <tr>
+              <td><code>float</code></td>
+              <td>4 bytes</td>
+              <td>1.2e-38 to 3.4e+38</td>
+              <td>6 decimal place</td>
+            </tr>
+            <tr>
+              <td><code>double</code></td>
+              <td>8 bytes</td>
+              <td>2.3e-308 to 1.7e+308</td>
+              <td>15 decimal place</td>
+            </tr>
+            <tr>
+              <td><code>long double</code></td>
+              <td>16 bytes</td>
+              <td>3.4e-4932 to 1.1e+4932</td>
+              <td>19 decimal place</td>
+            </tr>
+        </table>
+        <hr>
+
 
           </div>
         </div>
