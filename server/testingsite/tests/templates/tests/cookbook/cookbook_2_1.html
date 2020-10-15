@@ -11,14 +11,18 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
   <title>Hello, C!</title>
   <style>
-    table, th, td {
+    table,
+    th,
+    td {
       border: 1px solid black;
       border-collapse: collapse;
     }
-    th, td {
-      padding: 15px;
+
+    th,
+    td {
+      padding: 10px;
     }
-    </style>
+  </style>
 </head>
 
 <body>
@@ -44,7 +48,7 @@
     </div>
   </nav>
 
-  <main role="main" style="margin-top: 80px; margin-bottom: 10%;">
+  <main role="main" style="margin-top: 80px;">
     <div style="margin: 50px">
       <div class="row">
         <div class="col-2" style="position: fixed;">
@@ -59,6 +63,16 @@
         </div>
         <div class="col-2" style="visibility: hidden;"></div>
         <div class="col-10">
+          <div style="text-align: right;">
+            <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
+              src="https://avatars1.githubusercontent.com/u/59785146?s=400&u=4cc6336d8d9ab38e839001b445343fc3b8073cd7&v=4">
+            <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
+              src="https://avatars0.githubusercontent.com/u/28524641?s=460&u=ea270bcbecf0d9af97c2898aabd46370d07a1c46&v=4">
+            <p style="font-size: small; color: gray;">This page was contribucted by <a
+                href="https://github.com/LinZhihao-723">LittleStar</a> and <a
+                href="https://github.com/Louis-He">Louis-He</a>. Late updated on oct. 14th, 2020.</p>
+          </div>
+          <hr>
           <div class="tab-content">
             <h4>Data Type</h4>
             <p>
@@ -71,24 +85,26 @@ double b;  //This is a double type floating point
 char c;    //This is a signed character</code></pre>
             </p>
             <p>
-              Data is stored inside the computer memory. However, different kinds of data may require different 
-              size of space to store. You know, it's just like you cannot park your car in your refrigerator. In C and 
-              C++, develpers need to tell the computer explicitly what data type they are using so that they can be stored
+              Data is stored inside the computer memory. However, different kinds of data may require different
+              size of space to store. You know, it's just like you cannot park your car in your refrigerator. In C and
+              C++, develpers need to tell the computer explicitly what data type they are using so that they can be
+              stored
               in a proper space.
             </p>
             <p>
-              On the other hand, different kinds of data may be used in different ways. Computer will not know what to do with 
-              the data you give to it unless you define the data type. 
+              On the other hand, different kinds of data may be used in different ways. Computer will not know what to
+              do with
+              the data you give to it unless you define the data type.
             </p>
             <p>
-              In general, the basic data types can be divided into two categories: 
-              
+              In general, the basic data types can be divided into two categories:
+
               <span style="background-color: #FFFF00">the integer type</span>
 
-              and 
-              
+              and
+
               <span style="background-color: #FFFF00">the floating point type</span>
-              
+
               . Don't worry, we will go through all the details right away.
             </p>
 
@@ -96,48 +112,49 @@ char c;    //This is a signed character</code></pre>
 
             <h5>Bit and Byte</h5>
             <p>
-              Before we start talking about data type, we need to learn a little bit about 
-              how numbers are stored in a computer. 
-              
+              Before we start talking about data type, we need to learn a little bit about
+              how numbers are stored in a computer.
+
             </p>
             <p>
-              Instead of using decimal numbers, mordern computers are using binary numbers to store data. 
-              This simply means that a digit in a binary number can be only 0 or 1. In fact, this is 
-              what we call one <code>bit</code>: a bit is essentailly a binary 
+              Instead of using decimal numbers, mordern computers are using binary numbers to store data.
+              This simply means that a digit in a binary number can be only 0 or 1. In fact, this is
+              what we call one <code>bit</code>: a bit is essentailly a binary
               digit with two possible states: 0 and 1.
             </p>
             <p>
-              With a sequence of bits, computer will be able to represent numbers and perform arithmetic or logic 
-              operations. However, dealing with a bunch of bits are not convenient. Conventionally, 
-              we define that a group of bits with size of 8 as one <code>byte</code>. 
-              Therefore, the relation between bit and byte is:       
+              With a sequence of bits, computer will be able to represent numbers and perform arithmetic or logic
+              operations. However, dealing with a bunch of bits are not convenient. Conventionally,
+              we define that a group of bits with size of 8 as one <code>byte</code>.
+              Therefore, the relation between bit and byte is:
             </p>
             <p align="center">
               1 Byte = 8 Bits
             </p>
             <p>
-              Extra reference:<br> 
+              Extra reference:<br>
               To learn why computers are using binary representations, you can watch this YouTube video: <a
                 href="https://www.youtube.com/watch?v=thrx3SBEpL8">Why Use Binary?</a> <br>
               Or maybe you are intereted with the bit-byte relations: <a
-              href="https://www.youtube.com/watch?v=ixJCo0cyAuA&t=97s">Where did Bytes Come From?</a>
+                href="https://www.youtube.com/watch?v=ixJCo0cyAuA&t=97s">Where did Bytes Come From?</a>
             </p>
             <hr>
 
             <h5>Integer Type</h5>
             <p>
-              These types used to store integer data. Even though some of them may have different use, for example, a 
-              <code>char</code> can be used to represent a character, but it is stored as an integer in the memory space. 
+              These types used to store integer data. Even though some of them may have different use, for example, a
+              <code>char</code> can be used to represent a character, but it is stored as an integer in the memory
+              space.
             </p>
             <p>
-              The following table shows all the commonly used integer types, as well as the space each type takes 
-              and the range of integer it can store.  
+              The following table shows all the commonly used integer types, as well as the space each type takes
+              and the range of integer it can store.
             </p>
             <table border="1" style="width:70%">
               <tr>
-                  <td><strong>Type</strong></td>
-                  <td><strong>Memory Space</strong></td>
-                  <td><strong>Range</strong></td>
+                <td><strong>Type</strong></td>
+                <td><strong>Memory Space</strong></td>
+                <td><strong>Range</strong></td>
               </tr>
               <tr>
                 <td><code>bool</code></td>
@@ -145,9 +162,9 @@ char c;    //This is a signed character</code></pre>
                 <td>0 or 1</td>
               </tr>
               <tr>
-                  <td><code>char</code></td>
-                  <td>1 byte</td>
-                  <td>-128 to 127</td>
+                <td><code>char</code></td>
+                <td>1 byte</td>
+                <td>-128 to 127</td>
               </tr>
               <tr>
                 <td><code>unsigned char</code></td>
@@ -184,24 +201,23 @@ char c;    //This is a signed character</code></pre>
                 <td>8 bytes</td>
                 <td>0 to 18,446,744,073,709,551,615</td>
               </tr>
-          </table>
-          <p></p>
-          <p>Note:</p>
-          <p>
-            The size of each type may be different under different computer architecture, or with different compilier. 
-            The table above shows the memory space under x86_64 instruction set with 
-            Linux gcc-5.3.1 compiler. At this moment, you don't have to understand what those stuffs are, you just need to 
-            have a sense that the space of given type is machine dependent.
-          </p>
-          <p>
-            To get a precise memory size of a given type, you can use <code>sizeof</code> operator. For example:
-          </p>
-          <pre><code>sizeof(int)</code></pre>
-          <p>
-            This expression will return the how many bytes an integer takes in your computer.
-          </p>
-
-          <hr>
+            </table>
+            <p></p>
+            <p>Note:</p>
+            <p>
+              The size of each type may be different under different computer architecture, or with different compilier.
+              The table above shows the memory space under x86_64 instruction set with
+              Linux gcc-5.3.1 compiler. At this moment, you don't have to understand what those stuffs are, you just
+              need to
+              have a sense that the space of given type is machine dependent.
+            </p>
+            <p>
+              To get a precise memory size of a given type, you can use <code>sizeof</code> operator. For example:
+            </p>
+            <pre><code>sizeof(int)</code></pre>
+            <p>
+              This expression will return the how many bytes an integer takes in your computer.
+            </p>
 
           </div>
         </div>
@@ -212,6 +228,13 @@ char c;    //This is a signed character</code></pre>
     <!-- /container -->
   </main>
 
+  <footer style="margin-bottom: 5%; margin-top: 5%;">
+    <hr>
+    <div style="text-align: center; padding-top: 30px;">
+      <p style="color: gray;">&copy; 2020 <a href="https://github.com/Louis-He/C_testing" target="_blank">Hello, C!
+          project</a></p>
+    </div>
+  </footer>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
