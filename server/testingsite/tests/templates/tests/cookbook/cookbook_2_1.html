@@ -86,13 +86,9 @@ char c;    //This is a signed character</code></pre>
             </p>
             <p>
               Data is stored inside the computer memory. However, different kinds of data may require different
-              size of space to store. You know, it's just like you cannot park your car in your refrigerator. In C and
-              C++, develpers need to tell the computer explicitly what data type they are using so that they can be
-              stored
-              in a proper space.
-            </p>
-            <p>
-              On the other hand, different kinds of data may be used in different ways. Computer will not know what to
+              sizes of space to store. You know, it's just like you cannot park your car in your refrigerator. In C and
+              C++, developers need to explicitly define the data type so that computers can understand how much space to allocate.
+              On the other hand, different kinds of data may be used in different ways. Computers will not know what to
               do with
               the data you give to it unless you define the data type.
             </p>
@@ -117,15 +113,15 @@ char c;    //This is a signed character</code></pre>
 
             </p>
             <p>
-              Instead of using decimal numbers, mordern computers are using binary numbers to store data.
+              Instead of using decimal numbers, modern computers are using binary numbers to store data.
               This simply means that a digit in a binary number can be only 0 or 1. In fact, this is
-              what we call one <code>bit</code>: a bit is essentailly a binary
+              what we call one <code>bit</code>: a bit is essentially a binary
               digit with two possible states: 0 and 1.
             </p>
             <p>
-              With a sequence of bits, computer will be able to represent numbers and perform arithmetic or logic
-              operations. However, dealing with a bunch of bits are not convenient. Conventionally,
-              we define that a group of bits with size of 8 as one <code>byte</code>.
+              With a sequence of bits, computers will be able to represent numbers and perform arithmetic or logic
+              operations. However, dealing with a bunch of bits is not convenient. Conventionally,
+              we define that a group of bits with a size of 8 as one <code>byte</code>.
               Therefore, the relation between bit and byte is:
             </p>
             <p align="center">
@@ -135,7 +131,7 @@ char c;    //This is a signed character</code></pre>
               Extra reference:<br>
               To learn why computers are using binary representations, you can watch this YouTube video: <a
                 href="https://www.youtube.com/watch?v=thrx3SBEpL8">Why Use Binary?</a> <br>
-              Or maybe you are intereted with the bit-byte relations: <a
+              Or maybe you are intereted in the bit-byte relations: <a
                 href="https://www.youtube.com/watch?v=ixJCo0cyAuA&t=97s">Where did Bytes Come From?</a>
             </p>
             <hr>
@@ -143,13 +139,13 @@ char c;    //This is a signed character</code></pre>
             <h5>Integer Type</h5>
             <p>
 
-              Integer type is used to store integer data. Even though some of them may have different use, for example, a 
-              <code>char</code> can be used to represent a character, but it is stored as an integer in the memory space. 
+              The integer types are used to store integer data. Even though some of them may have a different use, for example, a 
+              <code>char</code> can be used to represent a character, but essentially they are all integers. 
 
             </p>
             <p>
               The following table shows all the commonly used integer types, as well as the space each type takes
-              and the range of integer it can store.
+              and its numerical range.
             </p>
             <table border="1" style="width:70%">
               <tr>
@@ -206,11 +202,11 @@ char c;    //This is a signed character</code></pre>
             <p></p>
             <p>Note:</p>
             <p>
-              The size of each type may be different under different computer architecture, or with different compilier.
+              The size of each type may be different under different computer architecture, or with different compiler.
               The table above shows the memory space under x86_64 instruction set with
               Linux gcc-5.3.1 compiler. At this moment, you don't have to understand what those stuffs are, you just
               need to
-              have a sense that the space of given type is machine dependent.
+              have a sense that the space of a given type is machine dependent.
             </p>
             <p>
               To get a precise memory size of a given type, you can use <code>sizeof</code> operator. For example:
@@ -220,16 +216,17 @@ char c;    //This is a signed character</code></pre>
               This expression will return the how many bytes an integer takes in your computer.
             </p>
 
+            <hr>
           <h5>Floating Type</h5>
           <p>
             Integers are not suitable for all applications. Sometimes it is necessary to
             have variables that can store numbers with digits after the decimal point. These variables 
-            are called floating type. 
+            are called floating types. 
           </p>
           <p>
-            The following table lists all the most commonly used floating types. The difference of these 
-            types is the precision of representing decimal digits. Similar to the integer type, more precise 
-            the type is, more memory space it will occupy. Note that all the floating types are signed numbers.
+            The following table lists all the most commonly used floating types. The difference among these 
+            types is the precision of representing decimal digits. Similar to the integer type, the more precise 
+            the type is, the more memory space it will occupy. Note that all the floating types are signed numbers.
           </p>
           <table border="1" style="width:80%">
             <tr>
@@ -258,8 +255,29 @@ char c;    //This is a signed character</code></pre>
             </tr>
         </table>
         <hr>
-
-
+        <h5>Void Type</h5>
+        <p>
+          Besides all the types shown above, we have a special type named "<code>void</code>". 
+          Generally, the void type is not used to describe the property of data. However, it is still very important in our coding life. Generally, it has 
+          the following usage:</p>
+          <p>
+            1. it is used as the return type of a function which indicates returning nothing.<br>
+            2. it is widely used in memory management (as void pointer types).
+        </p>
+        <p>
+          If you cannot understand the void type right now, please don't be nervous. We will come back later when we introduce functions and pointers.
+        </p>
+        <hr>
+        <h5>Conclusion</h5>
+        <p>
+          In this section, we introduced the concept of the data type. In the beginning, we discussed bits and bytes to give you an overview of how computers 
+          count numbers. Then, we introduced two basic data type categories (the integer type and the floating type) and the void type, which will be 
+          mostly used in your future codings. 
+        </p>
+        <p>
+          Note that in addition to what we have shown so far, there are other data types you will need to know (such as pointers), but they are 
+          actually derived based on these basic types we introduced here. We will go through in detail in later chapters.
+        </p>
           </div>
         </div>
       </div>
