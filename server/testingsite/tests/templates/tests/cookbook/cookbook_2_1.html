@@ -147,7 +147,7 @@ char c;    //This is a signed character</code></pre>
               The following table shows all the commonly used integer types, as well as the space each type takes
               and its numerical range.
             </p>
-            <table border="1" style="width:70%">
+            <table border="1" style="width:90%">
               <tr>
                 <td><strong>Type</strong></td>
                 <td><strong>Memory Space</strong></td>
@@ -200,7 +200,25 @@ char c;    //This is a signed character</code></pre>
               </tr>
             </table>
             <p></p>
-            <p>Note:</p>
+            <p>
+              We will now introduce these types in detail. First, let's look at the <code>bool</code> type. Bool type data 
+              has only two states: 0 or 1, which represent logic false and logic true, respectively. You can also use <code>true</code> to replace 
+              1, and use <code>false</code> to replace 0. This type of data is often used in control flows. In C++, <code>bool</code> is already defined for you. However, in C, you need 
+              to include the head file <code>stdbool.h</code>.
+            </p>
+
+            <p>
+              Then let's look at the <code>char</code> type. Data of this type is essentially stored as integers, but they are intepreted as characters based
+              on the American Standard Code for Information Interchange (ASCII). You can check the ASCII table <a
+              href="https://en.wikipedia.org/wiki/ASCII">here</a>.  
+            </p>
+
+            <p>
+              The rest of types are all considered as pure integer numbers. You may notice that some are tagged as "unsigned", and those types will always be non-negative. 
+              On the other hand, the types are also different in the space they take: the more space they take, the larger the range will be.
+            </p>
+
+            <h6>Note:</h6>
             <p>
               The size of each type may be different under different computer architecture, or with different compiler.
               The table above shows the memory space under x86_64 instruction set with
