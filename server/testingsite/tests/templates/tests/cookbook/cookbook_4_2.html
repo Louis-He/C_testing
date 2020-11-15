@@ -55,7 +55,7 @@
             <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
               src="https://avatars0.githubusercontent.com/u/28524641?s=460&u=ea270bcbecf0d9af97c2898aabd46370d07a1c46&v=4">
             <p style="font-size: small; color: gray;">This page was contribucted by <a
-                href="https://github.com/Louis-He">Louis-He</a>. Late updated on oct. 24th, 2020.</p>
+                href="https://github.com/Louis-He">Louis-He</a>. Late updated on Nov. 15th, 2020.</p>
           </div>
           <hr>
           <div class="tab-content">
@@ -172,7 +172,13 @@ int main(){
 
           <h4>Special Member Function</h4>
           <h5>1. Constructor</h5>
-          <h5>1.1 Default Constructor</h5>
+          <p style="font-weight: bold; color:navy;">When it is called? When an object is instantiated.</p>
+          <p>
+            A constructor is one of the many speicial member functions. How to tell whether a function is a constructor?
+            If a member function has no return type, then it is a construtor. As its name suggests, the goal of the
+            constructor is to create a new object.
+          </p>
+          <h5>1.1 Default Constructor - <code>class_name()</code></h5>
           <p>When an object is instantiated, under the hood the constructor of that class will be called. we will use
             class Human for example.
           <pre><code>#include &lt;iostream&gt;
@@ -211,18 +217,21 @@ public:
 Human::Human(){
   gender = 3;
   age = -1;
+  std::cout &lt;&lt; "default constructor called" &lt;&lt; std::endl;
 }
 
 int main(){
   Human Alice;
   std::cout &lt;&lt; Alice.gender &lt;&lt; " " &lt;&lt; Alice.age &lt;&lt; std::endl;
+  // output: default constructor called
   // output: 3 -1
   return 0;
 }</code></pre>
           Then you might confused about the new default constructor, why can we use age and gender directly? Which age
           and gender are we changing? Please see the side note above under chapter Member function.
           </p>
-          <h5>1.2 General Constructor</h5>
+          <h5>1.2 General Constructor - <code>class_name(/*parameter(s)*/)</code>
+          </h5>
           <p>
             However, when we instantiate a new object, we've already knew how old a person is and what is his/her
             gender.
@@ -237,11 +246,13 @@ public:
 Human::Human(int _age, int _gender){
   age = _age;
   gender = _gender;
+  std::cout &lt;&lt;  "general constructor called" &lt;&lt;  std::endl;
 }
 
 int main(){
   Human Alice = Human(20, 2);
   std::cout &lt;&lt; Alice.gender &lt;&lt; " " &lt;&lt; Alice.age &lt;&lt; std::endl;
+  // output: general constructor called
   // output: 2, 20
   return 0;
 }
@@ -250,7 +261,114 @@ int main(){
           parameters we have in the constructor. It is just a naming style so that the parameter names will not collide
           with the member variable name.
           </p>
-          <h5>1.3 Copy Constructor</h5>
+          <h5>1.3 Copy Constructor - <code>class_name(const class_name & parameter)</code></h5>
+          <p>
+            Copy constructor is another special member function. It will be called in the following scenerio.
+          <pre><code>Human Alice = Tom;
+Human Alice(Tom);</code></pre>
+          <span class="badge badge-warning">Note</span> Here the first line of the code doesn't really called a function
+          with an explicit copy constructor, but it instantiates a new Object Alice that is a copy of Tom. Therefore,
+          here C++ will call copy constructor implicitly.
+          </p>
+          <p>
+            How can we rewrite a copy constructor?
+          </p>
+          <p>
+            <hr>
+            <span class="badge badge-secondary">Side Note</span> Rewrite a function is called <strong>override</strong>.
+            Please do not confused with overload that we will talk about later.
+            <hr>
+          </p>
+          <p>
+          <pre><code>class Human{
+public:
+  // ... 
+  Human(const Human & _old);
+};
+
+Human::Human(const Human & _old){
+  age = _old.age;
+  gender = _old.gender;
+  std::cout &lt;&lt; "copy constructor called" &lt;&lt; std::endl;
+}
+
+int main(){
+  Human Alice = Human(20, 2);
+  Human Alice2(Alice);
+  std::cout &lt;&lt; Alice.gender &lt;&lt; " " &lt;&lt; Alice.age &lt;&lt; std::endl;
+  // output: general constructor called
+  // output: copy constructor used
+  // output: 2 20
+  return 0;
+}</code></pre>
+          Here in the above code, we copied all the member variables from old object to the new object. And this is how
+          a copy construcor should work in general.
+          </p>
+          <p><span class="badge badge-warning">Note</span> Even if you don't override copy constructor, C++ will provide
+            one to you by default. Unlike the default constructor provided that does nothing, the default copy
+            constructor will copy all the member variables from old object to the new one. The same as we implemented as
+            above.
+          </p>
+          <p>
+            Then, you might think that it will be enough if we copy all the things from old object to the new one. What
+            bad things could happen? Let's take a look at the following example.
+          <pre><code>#include &lt;iostream&gt;
+
+class Human{
+public:
+    int *age;
+    Human();
+};
+
+Human::Human(){
+    age = new int;
+}
+
+int main(){
+    Human Alice;
+    *(Alice.age) = 10;
+    Human Emily(Alice);
+    (*(Alice.age))++;
+
+    std::cout &lt;&lt; *(Alice.age) &lt;&lt; " " &lt;&lt; *(Emily.age) &lt;&lt; std::endl;
+
+    return 0;
+}</code></pre>
+          You can try running the code above, you will get the output: <code>11 11</code>. Why? Pause here for a second
+          and think about it. We didn't override the copy constructor, so a default one was provided. What happened when
+          we called <code>Human Emily(Alice);</code>?
+          </p>
+
+          <p>
+            You may already guessed the reason why default copy constructor doesn't work. When we don't provide a copy
+            constructor explicitly, C++ will provide one for free and it should look like the following.
+          <pre><code>Human::Human(const Human &_old) {
+  age = _old.age;
+}</code></pre>
+          Note that member variable age is a pointer, not a value. So when we copy age from the old object to the new
+          one. We only copied a pointer, but not its content! Now <code>Emily.age</code> and <code>Alice.age</code> are
+          two pointers point to the same location where an integer belongs to. When we tried to increment the of Alice
+          by calling <code>(*(Alice.age))++;</code>, we increment the integer that <code>Alice.age</code> points to. And
+          don't forget, this is the same place we store Emily's age.
+          </p>
+          <p><span class="badge badge-danger">Important</span><strong> The
+              difference between shallow copy and deep
+              copy</strong><br> In the previous example, we only copied the pointer, but not the content. This
+            behaviour is called <strong>Shallow Copy</strong> If we want to copy the content, but not only the
+            pointer,
+            we need to allocate a new place and copy the value. This behaviour is called <strong>Deep Copy</strong>.
+          </p>
+
+          <p>
+            Then how can we implement copy construcor by making a deep copy?
+          <pre><code>Human::Human(const Human &_old) {
+  age = new int(*(_old.age));
+}</code></pre>
+          Instead of coping the pointer, we create a new space for the new member variable age, and then copy the value
+          of the old age to the new place. You can replace the original copy constrocter by this new implementation. You
+          should get the output: <code>11 10</code>. This should be the correct logic and what we want to achieve.
+          </p>
+
         </div>
       </div>
     </div>
