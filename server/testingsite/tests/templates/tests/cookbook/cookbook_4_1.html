@@ -45,6 +45,7 @@
             <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
             <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
             <a class="nav-link" href="/cookbook_4_1">Objects</a>
+            <a class="nav-link active" href="/cookbook_4_1">&nbsp;&nbsp;&nbsp;&nbsp;OOP Introduction</a>
           </div>
         </div>
         <div class="col-2" style="visibility: hidden;"></div>
@@ -53,11 +54,78 @@
             <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
               src="https://avatars0.githubusercontent.com/u/28524641?s=460&u=ea270bcbecf0d9af97c2898aabd46370d07a1c46&v=4">
             <p style="font-size: small; color: gray;">This page was contribucted by <a
-                href="https://github.com/Louis-He">Louis-He</a>. Late updated on oct. 14th, 2020.</p>
+                href="https://github.com/Louis-He">Louis-He</a>. Late updated on oct. 23rd, 2020.</p>
           </div>
           <hr>
           <div class="tab-content">
+            <div class="alert alert-warning" role="alert">
+              This page is for C++ only. C is not object oriented.
+            </div>
+            <h4>OOP Introduction</h4>
+            <p>
+              What is OOP? The simple answer is Object Oriented Programming. However, what is Object Oriented
+              Programming? I will say the three parts of OOP are encapsulation, inheritance and polymorphism. You still
+              don't get what I am saying? Don't worry, we prepared a whole unit for the OOP concept. Let's start with
+              some basic concept: class and object.
+            </p>
+            <h5>Class and Object</h5>
+            <p>
+              Class can be interpreted as a template for its objects. Objects are the instance of a class. It is similar
+              to struct that we learned in C (struct also exists in C++). Let's see an
+              example. We have a class called <code>Human</code>. There are many metrics for a person, like gender,
+              height, weight,
+              and etc. Now we have an object of class Human, let's call him Tom. <code>Tom</code> is a man, 180cm tall,
+              and has a
+              weight of 60kg. We have another person (or object), <code>Alice</code>. She is a woman, 170cm tall, and
+              has a weight of
+              50kg.
+            </p>
+            <p>
+              Given the above example, we can think class as an abstract template for something, and object as a
+              detailed instance of the corresponding class. More examples like we can make <code>fruit</code> as a
+              class. Banana,
+              apple, and avocado can be some objects of <code>fruit</code> class.
+            </p>
+            <p>
+              Now, how can we represent these data written in C++? Let's look closer at the <code>Human</code> example.
+              First, review what we learned in struct. If we want to express this using struct the code should be
+              similar to the one below.
+            <pre><code>struct Human{
+  int gender; // 1: male, 2: female, 3: other
+  double height;
+  double weight;
+}
 
+int main(){
+  struct Human Alice, Tom;
+  // access data in struct
+  Alice.gender = 2;
+  Alice.height = 170.0;
+  Alice.weight = 50.0;
+
+  Tom.gender = 1;
+  Tom.height = 180.0;
+  Tom.weight = 60.0;
+  return 0; 
+}</code></pre>
+            </p>
+            <p>
+              Similarly, we can express it using class
+            <pre><code>class Human{
+  int gender; // 1: male, 2: female, 3: other
+  double height;
+  double weight;
+}
+
+int main(){
+  Human Alice, Tom;
+  /* The remaining code is the same as the above code segment*/
+}</code></pre>
+            </p>
+            <p>
+              You can see that member data in class is nearly identical to the data in struct. Now we can move on to
+              something that you can't see in C, member function.
+            </p>
           </div>
         </div>
       </div>

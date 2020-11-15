@@ -3,3 +3,4 @@ output.out
 test.exe
 server/testingsite/__pycache__/
 server/testingsite/tests/__pycache__/
+server/testingsite/tests/templates/tests/cookbook/debug.log

@@ -1,0 +1,285 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+  <title>Hello, C!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="/">Hello, C!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/syllabus">Syllabus</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/cookbook_index">CookBook! <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" style="margin-top: 80px; margin-bottom: 10%;">
+    <div style="margin: 50px">
+      <div class="row">
+        <div class="col-2" style="position: fixed;">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link" href="/cookbook_index">Home</a>
+            <a class="nav-link" href="/cookbook_1_1">Hello World</a>
+            <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
+            <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
+            <a class="nav-link" href="/cookbook_4_1">Objects</a>
+            <a class="nav-link" href="/cookbook_4_1">&nbsp;&nbsp;&nbsp;&nbsp;OOP Introduction</a>
+            <a class="nav-link active" href="/cookbook_4_2">&nbsp;&nbsp;&nbsp;&nbsp;Member Function</a>
+          </div>
+        </div>
+        <div class="col-2" style="visibility: hidden;"></div>
+        <div class="col-10">
+          <div style="text-align: right;">
+            <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
+              src="https://avatars0.githubusercontent.com/u/28524641?s=460&u=ea270bcbecf0d9af97c2898aabd46370d07a1c46&v=4">
+            <p style="font-size: small; color: gray;">This page was contribucted by <a
+                href="https://github.com/Louis-He">Louis-He</a>. Late updated on oct. 24th, 2020.</p>
+          </div>
+          <hr>
+          <div class="tab-content">
+            <div class="alert alert-warning" role="alert">
+              This page is for C++ only. C is not object oriented.
+            </div>
+            <h4>Member Function</h4>
+            <p>
+              In OOP language, we have member functions that can access, and manipulate the member data inside an
+              object. Now take the class <code>Human</code> as an example. We have a member data <code>age</code>.
+              We want to implement a function that can increment the age of an object (a person).
+            </p>
+            <pre><code>class Human{
+public:
+  int age;
+  /* Some other member data */
+
+  void increment_age(){
+    age++;
+  }
+};
+
+int main(){
+  /* Some other codes */
+}</code></pre>
+            <p>
+              Now, how can we increment the age of Tom? We need to modifiy the member data of an object. This is the
+              very basic idea of OOP which means we are manipulating objects.
+            </p>
+            <pre><code>#include &lt;iostream&gt;
+              
+class Human{
+public:
+  int age;
+  /* Some other member data */
+
+  void increment_age(){
+    age++;
+  }
+};
+
+int main(){
+  Human Alice, Tom;
+  Alice.age = 5;
+  Tom.age = 10;
+  // Tom just had his 11th birthday, lets increment his age!
+  Tom.increment_age();
+
+  std::cout &lt;&lt; Alice.age &lt;&lt; " " &lt;&lt; Tom.age &lt;&lt; std::endl;
+  // output: 5 11
+}</code></pre>
+            <p><span class="badge badge-warning">Note</span> A note here is that when we call
+              <code>increment_age</code>, only the age of Tom incremented. The age of
+              Alice was untouched. Why is that? How can the code know which object it is changing in the member
+              function? Notice that when we are calling a member function, we are doing some operations with respect to
+              a certain object. For example, for the code <code>Tom.increment_age()</code>, we are calling increment_age
+              function with respect to object Tom. Within the function, when we are using variable <code>age</code>, we
+              already know that the object Tom called this function, so we can use age directly.
+            </p>
+            <p>
+              <hr style="border-color:darkgrey;">
+              <span class="badge badge-secondary">Side Note</span> In order to understand the problem more
+              comprehensively, we need to introduce another keyword <code>this</code>. In the above code, we implemented
+              the member function as following
+            <pre><code>void increment_age(){
+  age++;
+}</code></pre>
+            However, we simplified a keyword <code>this</code> and the C++ did that for us. The code should be as the
+            following
+            <pre><code>void increment_age(){
+  (this->age)++;
+}</code></pre>
+            Here, <code>this</code> is a pointer of type <code>Human</code> that points to the object whoever called
+            this function. When we call <code>Tom.increment_age()</code>, <code>this</code> will be a pointer points to
+            the object <code>Tom</code>. If we don't write <code>this</code> explicitly, C++ still understands what we
+            are tring to do.
+            <hr style="border-color:darkgrey;">
+            </p>
+            <p>In order to make our code look more clear, usually we only declare our member function in the class, and
+              we will implement the function later similar to what we did in C (function declration and implementaion).
+              After we rewrite the code, it will become something like below.
+            </p>
+            <pre><code>#include &lt;iostream&gt;
+
+class Human{
+public:
+  int age;
+  int gender; // 1: male, 2: female, 3: other
+  /* Some other member data */
+
+  void increment_age();
+};
+
+void Human::increment_age(){
+  age++;
+}
+
+int main(){
+  Human Alice, Tom;
+  Alice.age = 5;
+  Tom.age = 10;
+  // Tom just had his 11th birthday, lets increment his age!
+  Tom.increment_age();
+
+  std::cout &lt;&lt; Alice.age &lt;&lt; " " &lt;&lt; Tom.age &lt;&lt; std::endl;
+  // output: 5 11
+}</code></pre>
+          </div>
+          <p>
+            In OOP language, we have member functions that can access, and manipulate the member data inside an
+            object. Now take the class <code>Human</code> as an example. We have a member data <code>age</code>.
+            We want to implement a function that can increment the age of an object (a person).
+          </p>
+
+          <h4>Special Member Function</h4>
+          <h5>1. Constructor</h5>
+          <h5>1.1 Default Constructor</h5>
+          <p>When an object is instantiated, under the hood the constructor of that class will be called. we will use
+            class Human for example.
+          <pre><code>#include &lt;iostream&gt;
+
+int main(){
+  Human Alice; // calls the constructor by default
+  Human Tom = Human(); // Human() calls the constructor
+}</code></pre>
+          Let's go back for a second, I think we never wrote any member function other than <code>increment_age</code>?
+          Then why constructor exists? It turns out that there is something called default constructor. When we have't
+          implemented any kind of constructors, the default constructor is there and we can assume it is implemented
+          as follows.
+          <pre><code>class Human{
+  Human();
+}
+
+Human::Human(){}</code></pre>
+          Yeah, as you can see. The default constrocter implemented for you literally does nothing! However, it does one
+          good thing is that there will be no compile-time error. When you instantiate a new object like
+          <code>Human Alice;</code> or <code>Human()</code>, the code calls the default construcor
+          <code>Human()</code> and gives you a new object. But let's say I want to change the default construcor, we
+          want to set gender to 3 and age to -1 at the time a new Human objetc is instantiated. How can we do that? We
+          need to rewrite the default construcor. But we already have one that was given by default, redeclare and
+          rewrite the function will bring us a compile-time error? Not exactly. When any constructor is
+          implemented, the construcot given by default will not exist anymore.
+          <pre><code>#include &lt;iostream&gt;
+            
+class Human{
+public:
+  int age;
+  int gender;
+
+  Human();
+};
+
+Human::Human(){
+  gender = 3;
+  age = -1;
+}
+
+int main(){
+  Human Alice;
+  std::cout &lt;&lt; Alice.gender &lt;&lt; " " &lt;&lt; Alice.age &lt;&lt; std::endl;
+  // output: 3 -1
+  return 0;
+}</code></pre>
+          Then you might confused about the new default constructor, why can we use age and gender directly? Which age
+          and gender are we changing? Please see the side note above under chapter Member function.
+          </p>
+          <h5>1.2 General Constructor</h5>
+          <p>
+            However, when we instantiate a new object, we've already knew how old a person is and what is his/her
+            gender.
+            Can
+            we do something like other functions to pass in some values to a constrocter? Yes, we can!
+          <pre><code>class Human{
+public:
+  // ... 
+  Human(int _age, int _gender);
+};
+
+Human::Human(int _age, int _gender){
+  age = _age;
+  gender = _gender;
+}
+
+int main(){
+  Human Alice = Human(20, 2);
+  std::cout &lt;&lt; Alice.gender &lt;&lt; " " &lt;&lt; Alice.age &lt;&lt; std::endl;
+  // output: 2, 20
+  return 0;
+}
+</code></pre>
+          <span class="badge badge-info">Suggestion</span> Here you can see that I added an underscore before the
+          parameters we have in the constructor. It is just a naming style so that the parameter names will not collide
+          with the member variable name.
+          </p>
+          <h5>1.3 Copy Constructor</h5>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- /container -->
+  </main>
+
+  <footer style="margin-bottom: 5%; margin-top: 5%;">
+    <hr>
+    <div style="text-align: center; padding-top: 30px;">
+      <p style="color: gray;">&copy; 2020 <a href="https://github.com/Louis-He/C_testing" target="_blank">Hello, C!
+          project</a></p>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+
+</html>
