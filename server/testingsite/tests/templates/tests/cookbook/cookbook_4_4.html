@@ -1,0 +1,382 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+  <title>Hello, C!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="/">Hello, C!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/syllabus">Syllabus</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/cookbook_index">CookBook! <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" style="margin-top: 80px; margin-bottom: 10%;">
+    <div style="margin: 50px">
+      <div class="row">
+        <div class="col-2" style="position: fixed;">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link" href="/cookbook_index">Home</a>
+            <a class="nav-link" href="/cookbook_1_1">Hello World</a>
+            <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
+            <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
+            <a class="nav-link" href="/cookbook_4_1">Objects</a>
+            <a class="nav-link" href="/cookbook_4_1">&nbsp;&nbsp;&nbsp;&nbsp;OOP Introduction</a>
+            <a class="nav-link" href="/cookbook_4_2">&nbsp;&nbsp;&nbsp;&nbsp;Member Function</a>
+            <a class="nav-link" href="/cookbook_4_3">&nbsp;&nbsp;&nbsp;&nbsp;Inheritance</a>
+            <a class="nav-link active" href="/cookbook_4_4">&nbsp;&nbsp;&nbsp;&nbsp;Polymorphism</a>
+            <a class="nav-link" href="/cookbook_5_1">Data Structure</a>
+          </div>
+        </div>
+        <div class="col-2" style="visibility: hidden;"></div>
+        <div class="col-10">
+          <div style="text-align: right;">
+            <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
+              src="https://avatars0.githubusercontent.com/u/28524641?s=460&u=ea270bcbecf0d9af97c2898aabd46370d07a1c46&v=4">
+            <p style="font-size: small; color: gray;">This page was contributed by <a
+                href="https://github.com/Louis-He">Louis-He</a>. Late updated on Dec. 6th, 2020.</p>
+          </div>
+          <hr>
+          <div class="tab-content">
+            <div class="alert alert-warning" role="alert">
+              This page is for C++ only. C is not object oriented.
+            </div>
+            <h4>Polymorphism</h4>
+            <p>
+              Polymorphism is an important concept in C++ and it is somewhat too abstract to explain. I will do my best
+              to explain it. First, let's imagine a scenario. You walk into a hotel room, there is a switch on the wall.
+              What will you do? You simply try to switch it on to see what will happen to the room. When you see the
+              switch, you know how to use it, however you don't know the function of this switch, it all depends on what
+              this switch connects to. You will never know what will happen beforehand. This kind of concept is
+              similar to polymorphism in OOP. Let's look at an example.
+            </p>
+            <p>Here is the definition of two classes. One inherited from the other.
+            <pre><code>class shape{
+public:
+  void print();
+};
+
+class circle:public shape{
+public:
+  void print();
+};
+
+void shape::print(){
+  std::cout &lt;&lt; "print from shape" &lt;&lt; std::endl;
+}
+
+void circle::print(){
+  std::cout &lt;&lt; "print from circle" &lt;&lt; std::endl;
+}
+</code></pre>
+            </p>
+            <p>
+              Here what will be the output?
+            <pre><code>int main(){
+  circle A;
+  shape* A_ptr = &#38;A;
+  A_ptr->print();
+
+  return 0;
+}</code></pre>
+            First, we instantiated an object of class <code>foo</code> called A. Then we defined a pointer
+            <code>A_ptr</code> of type <code>shape</code> that points to the object <code>A</code>. Here, you may
+            noticed that <code>A</code> is an object of type <code>foo</code>, why can we assign its address to a shape
+            pointer? This is similar to what we talked about in the previous chapter, this is called upcast and it is
+            safe to do so. However, it is illegal to do it backward: <code>shape A; foo* A_ptr = &#38;A;</code>.
+            Downcast will throw a compile-time error unless you use <code>dynamic_cast</code> instead. So what will the
+            output look like?
+            <pre><code>print from shape</code></pre>
+            Based on what we have learned about OOP, this makes sense since A_ptr is a pointer type of
+            <code>shape</code>, then it will just call the <code>print()</code> under class <code>shape</code>.
+            </p>
+
+            <h4>Virtual, Compile-time binding vs. run-time binding</h4>
+            <p>
+              Now, I will introduce a new keyword in C++, <code>virtual</code>. Along with the new keyword, I will
+              introduce the difference between compile-time binding and run-time binding. First, let me change a little
+              to the program above. Instead of <code>void shape::print()</code>, we change it to
+              <code>virtual void shape::print()</code>. Now the code for class shape becomes the following, we keep all
+              the other code the same as before. What will be the output now?
+            <pre class="cpp"><code>class shape{
+public:
+  virtual void print();
+};</code></pre>
+            The brief answer is
+            <pre><code>print from circle</code></pre> But why? What did this magic keyword <code>virtual</code> do?
+            Why <code>A_ptr->print()</code> called the member function <code>print()</code> from derived class but not
+            the base class?
+            </p>
+            <p>
+              When we use <code>virtual</code> keyword, we tell c++ to bind the function during run-time instead of
+              during compile-time. That means we don't know which member function (from base class or derived class?)
+              will be called during compile-time, when the program executes to that line, the function will be binded
+              and called. And that is based on what type of content the pointer actually points to. When the base class
+              type pointer points to a memory block that is actually a derived class object and if the function is
+              marked as <code>virtual</code>, the object will call the function from derived class instead of base
+              class. In this case, a base class pointer <code>shape*</code> points to a derived class object of type
+              <code>circle</code>. Because function <code>print()</code> is a virtual function, the function will be
+              binded during run-time. During run-time, the pointer actually points to a memory block of an object of
+              type <code>circle</code>. Therefore, the member function from class <code>circle</code> is executed.
+            </p>
+            <hr>
+            <p>
+              <span class="badge badge-secondary">Side Note</span> Under the hood, there is actually a virtual pointer
+              and a virtual table for each class. However, it is a
+              more advanced topic about how polymorphism is implemented in c++. Here, we only talked about how it
+              behaves but not how it is implemented. You can visit this site for more
+              information if you are interested. <a href="https://www.geeksforgeeks.org/virtual-function-cpp/">Virtual
+                Function in C++</a>
+            </p>
+            <hr>
+            <h4>Comprehensive Example</h4>
+            <p>
+              let's take a look at a more comprehensive example so that we can get the new concept straight. This is a
+              pretty straight forward code, I will not explain it line by line.
+            <pre><code>class shape{
+public:
+  virtual void print();
+  void non_v_print();
+};
+
+class circle:public shape{
+public:
+  void print();
+  void foo();
+  void non_v_print();
+};
+
+
+void shape::print(){
+  std::cout &lt;&lt; "print from shape" &lt;&lt; std::endl;
+}
+
+void shape::non_v_print() {
+  std::cout &lt;&lt; "non_v_print from shape" &lt;&lt; std::endl;
+}
+
+void circle::print(){
+  std::cout &lt;&lt; "print from circle" &lt;&lt; std::endl;
+}
+
+void circle::foo() {
+  std::cout &lt;&lt; "foo from circle" &lt;&lt; std::endl;
+}
+
+void circle::non_v_print() {
+  std::cout &lt;&lt; "non_v_print from circle" &lt;&lt; std::endl;
+}</code></pre>
+            </p>
+            <p>The main function is as follows. Before you scroll down to the output and explanation, please grab a pen
+              and a piece of paper or your tablet and try to find out:
+              <li>Will this program compile? If not, which line(s) might have problem and why?</li>
+              <li>What will be the output of the program?</li>
+            <pre class="cpp"><code>int main(){
+  circle A;
+  shape B;
+
+  shape* A_ptr = &#38;A;
+  shape& A_ref = A;
+  shape A_shape = A;
+
+  circle* B_ptr = &#38;B;
+  circle B_circle = B;
+
+  A_ptr->print();
+  A_ref.print();
+  A_shape.print();
+  A.print();
+
+  A_ptr->foo();
+  A.foo();
+
+  A_ptr->non_v_print();
+  A.non_v_print();
+
+  return 0;
+}</code></pre>
+            </p>
+
+            <p>
+              Now let me explain the main program line by line. First we have two objects of type <code>circle</code>
+              and <code>shape</code> respectively.
+            </p>
+            <p>
+              Then we declared one pointer, one reference, and one object of type <code>shape</code>. Here we are doing
+              upcast from <code>circle</code> to <code>shape</code>, which is considered safe and compiler will not
+              complain.
+            </p>
+            <p>
+              Similarly, we declared one pointer and one object of type <code>circle</code>. Here, we are doing downcast
+              which is not allowed. The compiler will figure it out in compile-time and throw error. Both lines are
+              illegal.
+            </p>
+            <p>
+              Now, here the tricky part begins. When running <code>A_ptr->print();</code>. We defined
+              <code>print()</code> as a virtual function. Therefore, it is binded during run-time. The content stored in
+              the memory block pointed by <code>A_ptr</code> is actually an object of type <code>circle</code>, so we go
+              and see if there is any <code>print()</code> function under class <code>circle</code>. Yes! We have one,
+              so <code>circle::print()</code> will be executed.<br>
+              When running <code>A_ref.print();</code>, we know reference is similar to a pointer. We actually record
+              its address instead of an object, so the behavior is similar to a pointer. It will execute
+              <code>circle::print()</code> here.<br>
+              Next, we have <code>A_shape.print();</code>. Notice that <code>A_shape</code> is an object of type
+              <code>shape</code>. It is not an pointer. When we declare and define <code>A_shape</code>, it becomes an
+              object type of <code>shape</code>. It is not a <code>circle</code> anymore, hence it is treated as
+              type <code>shape</code> and <code>shape::print()</code> will be executed.<br>
+              Last, there is nothing special here. We have <code>A</code> as an object of type <code>circle</code>, and
+              it will just run <code>circle::print()</code>.
+            </p>
+            <p>
+              Now, we are at this line <code>A_ptr->foo();</code>. Notice that there is no <code>foo()</code> in class
+              <code>shape</code>. However, <code>A_ptr</code> is of type <code>shape*</code>. The compiler can't find
+              any <code>foo()</code> function in <code>shape</code>, therefore, the compiler will complain and throw an
+              error. This line is illegal.
+              Next, it is similar to the last line of the previous code segment. We have <code>A</code> as an object of
+              type <code>circle</code>, and it will just run <code>circle::foo()</code>.
+            </p>
+            <p>
+              In the last code segment, we have a non-virtual member function under both classes with the same form.
+              When the program is compiled, the compiler finds that function <code>non_v_print()</code> is not a virtual
+              function. Therefore, the function will be binded at compile-time. <code>A_ptr</code> is a pointer of type
+              <code>shape*</code>, well then the compiler will bind it to function
+              <code>shape::non_v_print()</code>.<br>
+              Similarly, the compiler finds that <code>A</code> is of type <code>circle</code>, so it will bind the
+              function to <code>circle::non_v_print()</code>
+            </p>
+            <p>
+              The output will be the following after we get rid of the lines that are illegal.
+            <pre><code>print from circle       // A_ptr->print();
+print from circle       // A_ref.print();
+print from shape        // A_shape.print();
+print from circle       // A.print();
+foo from circle         // A.foo();
+non_v_print from shape  // A_ptr->non_v_print();
+non_v_print from circle // A.non_v_print();</code></pre>
+            </p>
+            <p>
+              If you are still confused about this concept, which is very likely. Please try to write some toy programs
+              to clarify yourself.
+            </p>
+
+            <h4>Pure virtual function and abstract class</h4>
+            <p>
+              Think of a scenario, there are several shapes in front of you, some are circle, some are triangle, some
+              are rectangle. You will tell me the exact type of the shape of each one but not generally "hey, there is
+              some weird shape here." That's why we want to make class <code>shape</code> <strong>abstract</strong>,
+              meaning that we cannot instantiate any object that is class <code>shape</code>. How to make a class
+              abstract? We need to have at least one <strong>pure virtual function</strong> in a class.
+            </p>
+            <p>
+              We already know how a virtual function looks like, but how a pure virtual function looks like? It is very
+              similar, but with an extra "=0" add to the very end of the virtual function declaration.
+            <pre class="cpp"><code>class shape{
+public:
+  virtual void print() = 0;
+};
+
+class circle:public shape{
+public:
+  void print();
+};
+
+// you don't have to implement this function
+void shape::print(){
+  std::cout &lt;&lt; "print from shape" &lt;&lt; std::endl;
+}
+
+void circle::print(){
+  std::cout &lt;&lt; "print from circle" &lt;&lt; std::endl;
+}</code></pre>
+            Now I added a "=0" at the very end of <code>shape::print</code>, this function becomes a pure virtual
+            function and class <code>shape</code> becomes abstract. What does abstract means? Let's see the following
+            main function.
+
+            <pre class="cpp"><code>int main(){
+  shape a; // compile-time error, shape is abstract
+  shape* b = new shape(); // compile-time error, shape is abstract
+  circle c; // no problem
+  return 0;
+}</code></pre>
+
+            Therefore, for an abstract class, the only difference is that you can't instantiate an object from an
+            abstract class. All other inheritance properties still hold.
+            </p>
+
+            <p>
+              Also, notice that if you don't override and implement the pure virtual function in a derived class. The
+              derived class will inherit the pure virtual function from its base class, hence the derived class will
+              also be an abstract class.<br>
+              Example as follows, <code>circle</code> doesn't implement the pure virtual function <code>print</code> and
+              it is now an abstract class as well.
+            <pre class="cpp"><code>class shape{
+public:
+  virtual void print() = 0;
+};
+
+class circle:public shape{
+public:
+};
+
+// you don't have to implement this function
+void shape::print(){
+  std::cout &lt;&lt; "print from shape" &lt;&lt; std::endl;
+}
+</code></pre>
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- /container -->
+  </main>
+
+  <footer style="margin-bottom: 5%; margin-top: 5%;">
+    <hr>
+    <div style="text-align: center; padding-top: 30px;">
+      <p style="color: gray;">&copy; 2020 <a href="https://github.com/Louis-He/C_testing" target="_blank">Hello, C!
+          project</a></p>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+
+</html>

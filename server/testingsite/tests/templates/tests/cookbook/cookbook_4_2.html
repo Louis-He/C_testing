@@ -47,6 +47,9 @@
             <a class="nav-link" href="/cookbook_4_1">Objects</a>
             <a class="nav-link" href="/cookbook_4_1">&nbsp;&nbsp;&nbsp;&nbsp;OOP Introduction</a>
             <a class="nav-link active" href="/cookbook_4_2">&nbsp;&nbsp;&nbsp;&nbsp;Member Function</a>
+            <a class="nav-link" href="/cookbook_4_3">&nbsp;&nbsp;&nbsp;&nbsp;Inheritance</a>
+            <a class="nav-link" href="/cookbook_4_4">&nbsp;&nbsp;&nbsp;&nbsp;Polymorphism</a>
+            <a class="nav-link" href="/cookbook_5_1">Data Structure</a>
           </div>
         </div>
         <div class="col-2" style="visibility: hidden;"></div>
@@ -54,8 +57,8 @@
           <div style="text-align: right;">
             <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
               src="https://avatars0.githubusercontent.com/u/28524641?s=460&u=ea270bcbecf0d9af97c2898aabd46370d07a1c46&v=4">
-            <p style="font-size: small; color: gray;">This page was contribucted by <a
-                href="https://github.com/Louis-He">Louis-He</a>. Late updated on Nov. 15th, 2020.</p>
+            <p style="font-size: small; color: gray;">This page was contributed by <a
+                href="https://github.com/Louis-He">Louis-He</a>. Late updated on Nov. 29th, 2020.</p>
           </div>
           <hr>
           <div class="tab-content">
@@ -82,7 +85,7 @@ int main(){
   /* Some other codes */
 }</code></pre>
             <p>
-              Now, how can we increment the age of Tom? We need to modifiy the member data of an object. This is the
+              Now, how can we increment the age of Tom? We need to modify the member data of an object. This is the
               very basic idea of OOP which means we are manipulating objects.
             </p>
             <pre><code>#include &lt;iostream&gt;
@@ -134,9 +137,9 @@ int main(){
             are tring to do.
             <hr style="border-color:darkgrey;">
             </p>
-            <p>In order to make our code look more clear, usually we only declare our member function in the class, and
-              we will implement the function later similar to what we did in C (function declration and implementaion).
-              After we rewrite the code, it will become something like below.
+            <p>In order to make our code look more clear, usually we only declare our member functions in the class, and
+              we will implement the function later similar to what we did in C (function declaration and
+              implementation). After we rewrite the code, it will become something like below.
             </p>
             <pre><code>#include &lt;iostream&gt;
 
@@ -170,12 +173,62 @@ int main(){
             We want to implement a function that can increment the age of an object (a person).
           </p>
 
+          <h4>Access Control</h4>
+          <p>
+            You may already noticed that there is a keyword <code>public</code> in the above example. What does it do?
+            Let's see two programs.
+          <div class="row">
+            <div class="col-6">
+              <pre><code>class foo{
+  int id;
+};</code></pre>
+            </div>
+            <div class="col-6">
+              <pre><code>class foo{
+public:
+  int id;
+};</code></pre>
+            </div>
+          </div>
+          What will be the output of the following main program respectively?
+          <pre><code>int main(){
+  foo A;
+  A.id = 1;
+}</code></pre>
+          </p>
+          <p>
+            Before I explain the output, we first need to know what access control is.
+            In C++, there are three levels of access control, here we introduce two of them, <code>public</code> and
+            <code>private</code>. The rest <code>protected</code> will be introduced in chapter Inheritance.
+            <li><code>public</code>: If a member is public, this member can be access outside of the class.</li>
+            <li><code>private</code>: If a member is private, this member can be access only inside of the class or by
+              friend function. </li>
+          </p>
+          <p>
+            <strong>By default, if there is no keyword <code>public</code>, c++ will consider the member in the class as
+              <code>private</code>.</strong> What does it mean by inside and outside of the class?
+            <br>Inside the class means all the member functions, you can always get and set member data inside a member
+            function. Outside the class means anything but member functions, for example the code in main function.
+          </p>
+          <p>
+            Here, with the definition of <code>public</code> and <code>private</code>, we can analyze the output.
+            If the class is defined as the left side, the main program will not compile successfully. Because by
+            default, member <code>id</code> is <code>private</code>, and it cannot be accessed outside of the class.
+            However, the right side class definition marks <code>id</code> public, hence you can access it outside of
+            the class in main function.
+          </p>
+          <p>
+            <span class="badge badge-warning">Note</span> Normally, we will keep all the member data as
+            <code>private</code>. Some of the functions that we want to expose to the whole program will be marked as
+            <code>public</code>. This kind of design is called <strong>encapsulation</strong>.
+          </p>
+
           <h4>Special Member Function</h4>
           <h5>1. Constructor</h5>
-          <p style="font-weight: bold; color:navy;">When it is called? When an object is instantiated.</p>
+          <p style="font-weight: bold; color:navy;">When is it called? When an object is instantiated.</p>
           <p>
-            A constructor is one of the many speicial member functions. How to tell whether a function is a constructor?
-            If a member function has no return type, then it is a construtor. As its name suggests, the goal of the
+            A constructor is one of the many special member functions. How to tell whether a function is a constructor?
+            If a member function has no return type, then it is a constructor. As its name suggests, the goal of the
             constructor is to create a new object.
           </p>
           <h5>1.1 Default Constructor - <code>class_name()</code></h5>
@@ -196,14 +249,14 @@ int main(){
 }
 
 Human::Human(){}</code></pre>
-          Yeah, as you can see. The default constrocter implemented for you literally does nothing! However, it does one
+          Yeah, as you can see. The default constructor implemented for you literally does nothing! However, it does one
           good thing is that there will be no compile-time error. When you instantiate a new object like
-          <code>Human Alice;</code> or <code>Human()</code>, the code calls the default construcor
-          <code>Human()</code> and gives you a new object. But let's say I want to change the default construcor, we
-          want to set gender to 3 and age to -1 at the time a new Human objetc is instantiated. How can we do that? We
-          need to rewrite the default construcor. But we already have one that was given by default, redeclare and
+          <code>Human Alice;</code> or <code>Human()</code>, the code calls the default constructor
+          <code>Human()</code> and gives you a new object. But let's say I want to change the default constructor, we
+          want to set gender to 3 and age to -1 at the time a new Human object is instantiated. How can we do that? We
+          need to rewrite the default constructor. But we already have one that was given by default, redeclare and
           rewrite the function will bring us a compile-time error? Not exactly. When any constructor is
-          implemented, the construcot given by default will not exist anymore.
+          implemented, the constructor given by default will not exist anymore.
           <pre><code>#include &lt;iostream&gt;
             
 class Human{
@@ -236,7 +289,7 @@ int main(){
             However, when we instantiate a new object, we've already knew how old a person is and what is his/her
             gender.
             Can
-            we do something like other functions to pass in some values to a constrocter? Yes, we can!
+            we do something like other functions to pass in some values to a constructor? Yes, we can!
           <pre><code>class Human{
 public:
   // ... 
@@ -263,7 +316,7 @@ int main(){
           </p>
           <h5>1.3 Copy Constructor - <code>class_name(const class_name & parameter)</code></h5>
           <p>
-            Copy constructor is another special member function. It will be called in the following scenerio.
+            Copy constructor is another special member function. It will be called in the following scenario.
           <pre><code>Human Alice = Tom;
 Human Alice(Tom);</code></pre>
           <span class="badge badge-warning">Note</span> Here the first line of the code doesn't really called a function
@@ -341,7 +394,8 @@ int main(){
 
           <p>
             You may already guessed the reason why default copy constructor doesn't work. When we don't provide a copy
-            constructor explicitly, C++ will provide one for free and it should look like the following.
+            constructor explicitly, <strong>C++ will provide one for free</strong> and it should look like the
+            following.
           <pre><code>Human::Human(const Human &_old) {
   age = _old.age;
 }</code></pre>
@@ -354,21 +408,145 @@ int main(){
           <p><span class="badge badge-danger">Important</span><strong> The
               difference between shallow copy and deep
               copy</strong><br> In the previous example, we only copied the pointer, but not the content. This
-            behaviour is called <strong>Shallow Copy</strong> If we want to copy the content, but not only the
+            behavior is called <strong>Shallow Copy</strong> If we want to copy the content, but not only the
             pointer,
-            we need to allocate a new place and copy the value. This behaviour is called <strong>Deep Copy</strong>.
+            we need to allocate a new place and copy the value. This behavior is called <strong>Deep Copy</strong>.
           </p>
 
           <p>
-            Then how can we implement copy construcor by making a deep copy?
+            Then how can we implement copy constructor by making a deep copy?
           <pre><code>Human::Human(const Human &_old) {
   age = new int(*(_old.age));
 }</code></pre>
           Instead of coping the pointer, we create a new space for the new member variable age, and then copy the value
-          of the old age to the new place. You can replace the original copy constrocter by this new implementation. You
+          of the old age to the new place. You can replace the original copy constructor by this new implementation. You
           should get the output: <code>11 10</code>. This should be the correct logic and what we want to achieve.
           </p>
 
+          <h5>2. Destructor - <code>~class_name()</code></h5>
+          <p style="font-weight: bold; color:navy;">When it is called? Right before an object is out of scope.</p>
+          <p>
+            Destructor is called automatically for you. As a developer, you don't need to call it. The default
+            destructor given to you does nothing, and 99% of the time, it will be no problem. However, there might be
+            some problem if one of the member data is a type pointer and it points to a dynamic allocated memory place.
+            If you don't overload the destructor and free the space, there will be a memory leak. Let's look at an
+            example.
+
+          <pre><code>#include &lt;iostream&gt;
+
+class foo{
+    int *ptr;
+public:
+    foo();
+};
+
+foo:foo(){
+  ptr = new int(0);
+}
+
+int main(){
+  foo foo_obj;
+  return 0;
+}
+</code></pre>
+
+          Right before the program ends, <code>foo_obj</code> will be destructed. Since we haven't overloaded
+          destructor, the memory space that ptr points to will not be freed. Therefore, there will be a memory leak. How
+          can we fix that? Well, free the memory in the destructor!
+
+          <pre><code>class foo{
+  // ... other code ...
+  ~foo();
+}
+
+foo::~foo(){
+  delete ptr;
+}
+</code></pre>
+
+          Now when destructor is called, the memory will be freed and memory leak will not be a problem.
+          </p>
+          <h5>3. Accessor - <code>return_type get_xxx() const</code></h5>
+          <p style="font-weight: bold; color:navy;">When it is called? When you want to get private data member from
+            outside the class.</p>
+          <p>
+            When a member function is used to get the private data member of the class, it is called an
+            <strong>accessor</strong>. An example is as follows:
+          <pre><code>int foo::get_id() const{
+  return id;
+}</code></pre>
+          Notice that accessor can always be set as a constant member function because we are not supposed to change any
+          member data within an accessor.
+          </p>
+
+          <h5>4. Mutator - <code>return_type set_xxx()</code></h5>
+          <p style="font-weight: bold; color:navy;">When it is called? When you want to set private data member from
+            outside the class.</p>
+          <p>
+            When a member function is used to set the private data member of the class, it is called a
+            <strong>mutator</strong>. An example is as follows:
+          <pre><code>void foo::set_id(int new_id){
+  id = new_id;
+}</code></pre>
+          Notice that mutator can't be a constant member function because we need to set the member data.
+          </p>
+
+          <h5>5. Operator overload - <code>return_type operator_function(parameters)</code></h5>
+          <p style="font-weight: bold; color:navy;">When it is called? When the code uses operators.</p>
+          <p>
+            In this sub chapter, we will use the following complex number example. This is the easiest example I can
+            think of to demonstrate operator overload.
+
+          <pre><code>#include &lt;iostream&gt;
+#include &lt;math.h&gt;
+
+class complex{
+  double real;
+  double imagenary;
+
+public:
+  complex(double _real, double _img);
+}
+
+complex::complex(double _real, double _imagenary) {
+  real = _real;
+  imagenary = _imagenary;
+}
+</code></pre>
+
+          Let me ask you a very simple question: how to add two complex numbers? You may think it is a piece of cake,
+          just use operator +. But wait a second, how can the compiler know how to add two <code>complex</code> objects?
+          We need to tell the compiler what to do and this is when we need to overload the operation functions. First,
+          Let's understand how the operator functions get called. For example, we now have two <code>complex</code>
+          objects, <code>x</code> and <code>y</code>. When you write <code>x + y</code>, under the hood, the code will
+          execute <code>x.operator+(y)</code> instead. Now, that's rewrite <code>operator+</code> to support the
+          addition of two complex numbers!
+
+          <pre><code>// declaration is not shown, please fill it in the class to make it work.
+complex complex::operator+(const complex &rhs) const {
+  return complex(real + rhs.real, imagenary + rhs.imagenary);
+}
+</code></pre>
+          You may ask why we pass in a reference, not a value? Well, we only have two member data in class
+          <code>complex</code>. Imagine if we have tons of member data and maybe some are array or multi-dimensional
+          array, then it will be expensive to copy an object. That's why we prefer to use reference here, also we don't
+          want to change the value of <code>rhs</code>, we add a keyword <code>const</code> before the parameter.
+          Another noticeable thing here is that there is also a <code>const</code> at the end of the function. We add
+          this <code>const</code> to prevent modify any member data in the function. Similarly, we can overload bunch
+          other operator functions.
+
+          <pre><code>complex operator-(const complex & rhs) const;
+complex operator*(const complex & rhs) const;
+complex operator/(const complex & rhs) const;
+
+bool operator&lt;(const complex & rhs);
+bool operator&gt;(const complex & rhs);
+bool operator==(const complex & rhs);
+bool operator!=(const complex & rhs);
+
+ostream& operator&lt;&lt;ostream& stream, const complex & rhs); // non member function
+</code></pre>
+          </p>
         </div>
       </div>
     </div>

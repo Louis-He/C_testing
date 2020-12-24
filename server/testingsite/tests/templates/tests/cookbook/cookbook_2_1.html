@@ -59,6 +59,7 @@
             <a class="nav-link active" href="/cookbook_2_1">&nbsp;&nbsp;&nbsp;&nbsp;Data Type</a>
             <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
             <a class="nav-link" href="/cookbook_4_1">Objects</a>
+            <a class="nav-link" href="/cookbook_5_1">Data Structure</a>
           </div>
         </div>
         <div class="col-2" style="visibility: hidden;"></div>
@@ -87,7 +88,8 @@ char c;    //This is a signed character</code></pre>
             <p>
               Data is stored inside the computer memory. However, different kinds of data may require different
               sizes of space to store. You know, it's just like you cannot park your car in your refrigerator. In C and
-              C++, developers need to explicitly define the data type so that computers can understand how much space to allocate.
+              C++, developers need to explicitly define the data type so that computers can understand how much space to
+              allocate.
               On the other hand, different kinds of data may be used in different ways. Computers will not know what to
               do with
               the data you give to it unless you define the data type.
@@ -97,10 +99,10 @@ char c;    //This is a signed character</code></pre>
 
               <span style="background-color: #FFFF00">the integer type</span>
 
-              and 
-              
+              and
+
               <span style="background-color: #FFFF00">the floating type</span>
-              
+
               . Don't worry, we will go through all the details right away.
             </p>
 
@@ -139,8 +141,9 @@ char c;    //This is a signed character</code></pre>
             <h5>Integer Type</h5>
             <p>
 
-              The integer types are used to store integer data. Even though some of them may have a different use, for example, a 
-              <code>char</code> can be used to represent a character, but essentially they are all integers. 
+              The integer types are used to store integer data. Even though some of them may have a different use, for
+              example, a
+              <code>char</code> can be used to represent a character, but essentially they are all integers.
 
             </p>
             <p>
@@ -201,21 +204,27 @@ char c;    //This is a signed character</code></pre>
             </table>
             <p></p>
             <p>
-              We will now introduce these types in detail. First, let's look at the <code>bool</code> type. Bool type data 
-              has only two states: 0 or 1, which represent logic false and logic true, respectively. You can also use <code>true</code> to replace 
-              1, and use <code>false</code> to replace 0. This type of data is often used in control flows. In C++, <code>bool</code> is already defined for you. However, in C, you need 
+              We will now introduce these types in detail. First, let's look at the <code>bool</code> type. Bool type
+              data
+              has only two states: 0 or 1, which represent logic false and logic true, respectively. You can also use
+              <code>true</code> to replace
+              1, and use <code>false</code> to replace 0. This type of data is often used in control flows. In C++,
+              <code>bool</code> is already defined for you. However, in C, you need
               to include the head file <code>stdbool.h</code>.
             </p>
 
             <p>
-              Then let's look at the <code>char</code> type. Data of this type is essentially stored as integers, but they are intepreted as characters based
+              Then let's look at the <code>char</code> type. Data of this type is essentially stored as integers, but
+              they are intepreted as characters based
               on the American Standard Code for Information Interchange (ASCII). You can check the ASCII table <a
-              href="https://en.wikipedia.org/wiki/ASCII">here</a>.  
+                href="https://en.wikipedia.org/wiki/ASCII">here</a>.
             </p>
 
             <p>
-              The rest of types are all considered as pure integer numbers. You may notice that some are tagged as "unsigned", and those types will always be non-negative. 
-              On the other hand, the types are also different in the space they take: the more space they take, the larger the range will be.
+              The rest of types are all considered as pure integer numbers. You may notice that some are tagged as
+              "unsigned", and those types will always be non-negative.
+              On the other hand, the types are also different in the space they take: the more space they take, the
+              larger the range will be.
             </p>
 
             <h6>Note:</h6>
@@ -235,67 +244,73 @@ char c;    //This is a signed character</code></pre>
             </p>
 
             <hr>
-          <h5>Floating Type</h5>
-          <p>
-            Integers are not suitable for all applications. Sometimes it is necessary to
-            have variables that can store numbers with digits after the decimal point. These variables 
-            are called floating types. 
-          </p>
-          <p>
-            The following table lists all the most commonly used floating types. The difference among these 
-            types is the precision of representing decimal digits. Similar to the integer type, the more precise 
-            the type is, the more memory space it will occupy. Note that all the floating types are signed numbers.
-          </p>
-          <table border="1" style="width:80%">
-            <tr>
+            <h5>Floating Type</h5>
+            <p>
+              Integers are not suitable for all applications. Sometimes it is necessary to
+              have variables that can store numbers with digits after the decimal point. These variables
+              are called floating types.
+            </p>
+            <p>
+              The following table lists all the most commonly used floating types. The difference among these
+              types is the precision of representing decimal digits. Similar to the integer type, the more precise
+              the type is, the more memory space it will occupy. Note that all the floating types are signed numbers.
+            </p>
+            <table border="1" style="width:80%">
+              <tr>
                 <td><strong>Type</strong></td>
                 <td><strong>Memory Space</strong></td>
                 <td><strong>Range (Absolute value)</strong></td>
                 <td><strong>Precision</strong></td>
-            </tr>
-            <tr>
-              <td><code>float</code></td>
-              <td>4 bytes</td>
-              <td>1.2e-38 to 3.4e+38</td>
-              <td>6 decimal place</td>
-            </tr>
-            <tr>
-              <td><code>double</code></td>
-              <td>8 bytes</td>
-              <td>2.3e-308 to 1.7e+308</td>
-              <td>15 decimal place</td>
-            </tr>
-            <tr>
-              <td><code>long double</code></td>
-              <td>16 bytes</td>
-              <td>3.4e-4932 to 1.1e+4932</td>
-              <td>19 decimal place</td>
-            </tr>
-        </table>
-        <hr>
-        <h5>Void Type</h5>
-        <p>
-          Besides all the types shown above, we have a special type named "<code>void</code>". 
-          Generally, the void type is not used to describe the property of data. However, it is still very important in our coding life. Generally, it has 
-          the following usage:</p>
-          <p>
-            1. it is used as the return type of a function which indicates returning nothing.<br>
-            2. it is widely used in memory management (as void pointer types).
-        </p>
-        <p>
-          If you cannot understand the void type right now, please don't be nervous. We will come back later when we introduce functions and pointers.
-        </p>
-        <hr>
-        <h5>Conclusion</h5>
-        <p>
-          In this section, we introduced the concept of the data type. In the beginning, we discussed bits and bytes to give you an overview of how computers 
-          count numbers. Then, we introduced two basic data type categories (the integer type and the floating type) and the void type, which will be 
-          mostly used in your future codings. 
-        </p>
-        <p>
-          Note that in addition to what we have shown so far, there are other data types you will need to know (such as pointers), but they are 
-          actually derived based on these basic types we introduced here. We will go through in detail in later chapters.
-        </p>
+              </tr>
+              <tr>
+                <td><code>float</code></td>
+                <td>4 bytes</td>
+                <td>1.2e-38 to 3.4e+38</td>
+                <td>6 decimal place</td>
+              </tr>
+              <tr>
+                <td><code>double</code></td>
+                <td>8 bytes</td>
+                <td>2.3e-308 to 1.7e+308</td>
+                <td>15 decimal place</td>
+              </tr>
+              <tr>
+                <td><code>long double</code></td>
+                <td>16 bytes</td>
+                <td>3.4e-4932 to 1.1e+4932</td>
+                <td>19 decimal place</td>
+              </tr>
+            </table>
+            <hr>
+            <h5>Void Type</h5>
+            <p>
+              Besides all the types shown above, we have a special type named "<code>void</code>".
+              Generally, the void type is not used to describe the property of data. However, it is still very important
+              in our coding life. Generally, it has
+              the following usage:</p>
+            <p>
+              1. it is used as the return type of a function which indicates returning nothing.<br>
+              2. it is widely used in memory management (as void pointer types).
+            </p>
+            <p>
+              If you cannot understand the void type right now, please don't be nervous. We will come back later when we
+              introduce functions and pointers.
+            </p>
+            <hr>
+            <h5>Conclusion</h5>
+            <p>
+              In this section, we introduced the concept of the data type. In the beginning, we discussed bits and bytes
+              to give you an overview of how computers
+              count numbers. Then, we introduced two basic data type categories (the integer type and the floating type)
+              and the void type, which will be
+              mostly used in your future codings.
+            </p>
+            <p>
+              Note that in addition to what we have shown so far, there are other data types you will need to know (such
+              as pointers), but they are
+              actually derived based on these basic types we introduced here. We will go through in detail in later
+              chapters.
+            </p>
           </div>
         </div>
       </div>

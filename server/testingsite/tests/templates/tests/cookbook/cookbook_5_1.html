@@ -1,0 +1,421 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+  <title>Hello, C!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="/">Hello, C!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/syllabus">Syllabus</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/cookbook_index">CookBook! <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" style="margin-top: 80px; margin-bottom: 10%;">
+    <div style="margin: 50px">
+      <div class="row">
+        <div class="col-2" style="position: fixed;">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link" href="/cookbook_index">Home</a>
+            <a class="nav-link" href="/cookbook_1_1">Hello World</a>
+            <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
+            <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
+            <a class="nav-link" href="/cookbook_4_1">Objects</a>
+            <a class="nav-link" href="/cookbook_5_1">Data Structure</a>
+            <a class="nav-link active" href="/cookbook_5_1">&nbsp;&nbsp;&nbsp;&nbsp;Linked List</a>
+            <a class="nav-link" href="/cookbook_5_2">&nbsp;&nbsp;&nbsp;&nbsp;Tree</a>
+          </div>
+        </div>
+        <div class="col-2" style="visibility: hidden;"></div>
+        <div class="col-10">
+          <div style="text-align: right;">
+            <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
+              src="https://avatars0.githubusercontent.com/u/28524641?s=460&u=ea270bcbecf0d9af97c2898aabd46370d07a1c46&v=4">
+            <p style="font-size: small; color: gray;">This page was contributed by <a
+                href="https://github.com/Louis-He">Louis-He</a>. Late updated on Nov. 22nd, 2020.</p>
+          </div>
+          <hr>
+          <div class="tab-content">
+            <div class="alert alert-warning" role="alert">
+              This page is for C++ only. However, we may add code for C later.
+            </div>
+            <h4>Linked List</h4>
+            <p>Linked list is one of the most basic data structure that we can see. If you add some complexity to a
+              linked list, you will get a tree. If you want more, you will get a graph. Now, let's go back to linked
+              list. What is a linked list anyway?
+
+            <div class="row">
+              <div class="col-12 col-lg-5 col-xl-6">
+                Let's imagine a scenario. You are taking a note for a course. No matter whether you write done your
+                note in a notebook, or on your tablet, the note is written page by page (except OneNote, but we don't
+                care). If you end writing on one page, you will continue to the next page. The only thing you can do is
+                flip page. Now for a linked list, you imagine that what you have now is the first page, and the only
+                operation you can do is to flip to the next page.
+              </div>
+              <div class="col-12 col-lg-7 col-xl-6 align-self-center">
+                <img class="img-fluid mx-auto" src="{% static "/tests/cookbook/ll_intro.png" %}">
+              </div>
+            </div>
+            </p>
+            <h5>Example class</h5>
+            <p>Here are some code that we will use during the entire chapter.
+            <pre><code>class Node {
+    int val;
+    Node* next;
+
+public:
+    Node(int _val){
+        val = _val;
+        next = nullptr;
+    }
+    int get_val() const { return val;}
+    Node* get_next() const {return next;}
+    void set_val(int _val) { val = _val; }
+    void set_next(Node* _next){ next = _next; }
+};
+</code></pre>
+
+
+            <div class="row">
+              <div class="col-6 col-lg-8 col-xl-9">
+                A brief explanation about tje code above is that we defined a class <code>Node</code>. This class
+                described a single node that you see in the above example, and also you can see how it looks like from
+                the diagram on the right side. In this class, we have two member data, one for the value, one for the
+                address of next node. Right, here in c++, we can use the address of the next node to help us "flip the
+                page". Also, we have five member functions, there is nothing special for these functions. One is the
+                constructor, another four are used to get or set the member data.
+              </div>
+              <div class="col-6 col-lg-4 col-xl-3 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" src="{% static "/tests/cookbook/ll_node.png" %}">
+              </div>
+            </div>
+
+            Now let's move on to the real part. How are we gonna use c++ to perform some operations to the linked list.
+            Add a node? Search a node? or maybe remove a node?
+            </p>
+
+            <h4>1. Initialize a linked list</h4>
+            <p style="font-weight: bold; color:navy;">Remember to initialize everything</p>
+            <p>
+            <div class="row">
+              <div class="col-6 col-lg-8 col-xl-9">
+                <pre><code>int main(){
+  Node* head = nullptr;
+}
+</code></pre>
+              </div>
+              <div class="col-6 col-lg-4 col-xl-3 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" src="{% static "/tests/cookbook/ll_empty.png" %}">
+              </div>
+            </div>
+            That's it. That's all we need to do. We initialized an empty linked list. There is nothing stored in this
+            linked list. Next we are going to add some node to the list.
+            </p>
+            <h4>2. Insert a new node</h4>
+            Now, we need to add more stuff to our newly created linked list. Let's define a new function that we can use
+            to insert a new node. How are we gonna do that?
+            Let's take a look at some different example.
+            <h5>2.1 Insert - General Case</h5>
+            <div class="row">
+              <div class="col-12 col-lg-5">
+                <p>
+                  First, we need to create a new node, we call it <code>New_node</code>. Then we need to find the last
+                  node of the current existing linked list, so we can put the new node after it. That is why we need to
+                  have another temporary pointer <code>current</code>. It will first point to the head and then move
+                  along
+                  the linked list. When it finds that there is no next_node (i.e. next_node == nullptr), then it must
+                  point to the last node in the linked list. Why? Because the last node is the only node in the linked
+                  list that has no node after it! After we identify the last node, we can simply update the next node
+                  after the last node and points that to our new node just created.
+                </p>
+                <p>
+                  Not sure if you spotted any suspicious thing in the previous paragraph. Anything Sus? (Among Us is
+                  quite fun, you should definitely give it a try) What if we have an empty linked list? What will
+                  happen? Let's first write the code that we think should work and see from there.
+                </p>
+              </div>
+              <div class="col-12 col-lg-7 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-height: 400px;"
+                  src="{% static "/tests/cookbook/ll_insert.png" %}">
+              </div>
+            </div>
+            <pre class="cpp"><code>void insert(Node *head, int _val){
+  Node* new_node = new Node(_val);
+
+  Node* current_node = head;
+  // iterate to find the last node
+  while(current_node->get_next() != nullptr) {
+      current_node = current_node->get_next();
+  }
+  current_node->set_next(new_node);
+}</code></pre>
+            Does this code work if we are trying to insert a new node in an empty linked list? You can have a try on
+            your own IDE, and it should throw a runtime error while executing the line
+            <code>while(current_node->get_next() != nullptr) {</code>. If the linked list is empty, and head is a
+            nullptr, so as current_node. When we are trying to call <code>get_next()</code>, it will give us an error.
+            You can't call a member function if the object doesn't exist. That's why we need to explicitly take care of
+            this scenario, and this kind of special cases are called <strong>corner cases</strong>. We should be very
+            careful about corner cases when we are writing our codes. And some of the time, we may miss these cases, and
+            they can backfire and become a security vulnerability.
+            </p>
+
+            <h5>2.2 Insert - Corner Case - Empty Linked List</h5>
+            <p>
+              Then how are we going to solve this case? If the linked list is empty, what I should do is to set the head
+              to our new created node. We can return a new <code>head</code> or we can pass in <code>head</code> by
+              pointer or reference so that we can change it inside our <code>insert()</code> function.
+            </p>
+            <div class="row">
+              <div class="col-6">
+                <pre><code>Node* insert(Node *head, int _val){
+  Node* new_node = new Node(_val);
+  if(head == nullptr){ return new_node; } // special case here
+
+  Node* current_node = head;
+  while(current_node->get_next() != nullptr) {
+      current_node = current_node->get_next();
+  }
+  current_node->set_next(new_node);
+  return head; // head doesn't change in general case
+}</code></pre>
+              </div>
+              <div class="col-6">
+                <pre><code>void insert(Node *&head, int _val){
+  Node* new_node = new Node(_val);
+  if(head == nullptr){ head = new_node; }  // special case here
+
+  Node* current_node = head;
+  while(current_node->get_next() != nullptr) {
+      current_node = current_node->get_next();
+  }
+  // set the next_node of the last node to points to our new node
+  current_node->set_next(new_node);
+}</code></pre>
+              </div>
+            </div>
+            Both solutions should work fine.
+
+            <h4>3. Print the whole list</h4>
+            <p>
+              We can't print a linked list like other variables. We need to get each node, and try to get the next node
+              and print. The process will go on and on until we hit the end of the linked list. We can also say that we
+              need to iterate through the linked list to get each node and then print them out.
+            <pre><code>void print(Node* head){
+  Node* current = head;
+  // iterate through the list and print each node
+  while(current != nullptr){
+    std::cout &lt;&lt; current->get_val() &lt;&lt; std::endl;
+    current = current->get_next();
+  }
+  return nullptr;
+}</code></pre>
+            </p>
+
+            <h4>4. Search a node</h4>
+            <p>
+              Let's say we have a linked list, and we want to check whether there is a node with value 2. If there
+              exists at least a node of value 2, return me the first occurrence, otherwise return me a nullptr to
+              indicate that a node with value 2 does not exist.
+            </p>
+            <p>
+              In fact, it is similar to what we did in <code>print()</code>. What we need to do is to iterate through
+              the whole list and check whether the value of each node is the same as we are searching for. If it is the
+              same, we will return the pointer points to this node, otherwise we keep searching. Then what if there is
+              no such node? Well, we will eventually hit the last node and know there is no such node. Now, we can
+              return <code>nullptr</code> as we supposed to do. This function is pretty straightforward, we will show
+              you the code right away.
+            <pre><code>Node* search(Node* head, int target){
+  Node* current = head;
+  // iterate through the list and try to locate the target
+  while(current != nullptr){
+    if(current->get_val() == target) { return current; }
+    current = current->get_next();
+  }
+  return nullptr;
+}</code></pre>
+            </p>
+
+            <h4>5. Remove a node</h4>
+            <p>
+              Remove a node is the most complicated operation in linked list. There are many corner cases that we need
+              to consider. But first, let's consider general case as usual. Assume we have a linked list which has more
+              than one node. Now, we want to remove a node from this linked list.
+            </p>
+            <h4>5.1 Remove - General Case</h4>
+            <div class="row">
+              <div class="col-12 col-lg-5">
+                <p>
+                  On the right side, you can see how deleting a node works step by step (general case). First we need
+                  two pointers, one pointer used to traverse the whole linked list (<code>Current</code>), another one
+                  always points to the previous node of <code>Current</code>. When we find the target node, in this
+                  case, it is 2. Then we do the following steps:
+                </p>
+                <p>
+                  1. Before searching, we initialize the two pointers that we need to use: <code>Prev</code> and
+                  <code>Current</code>. At the very beginning, we set <code>Current</code> points to the first node
+                  which is the same as <code>Head</code>. There is no any node before the first node in the linked list,
+                  so we set <code>Prev</code> to point to the <code>nullptr</code>.
+                </p>
+                <p>
+                  2. After we remove the target node, the node prior to the target node should point to the node next
+                  to the target node. Therefore, we need to set the <code>next_node</code> of <code>Prev</code> to the
+                  next_node of <code>Current</code>.
+                </p>
+                <p>
+                  3. Are we done? No! All the nodes in the linked list are all dynamic allocated, if we just left the
+                  target node, we will have a memory leak problem. So we need to remove the node <code>Current</code>.
+                </p>
+              </div>
+              <div class="col-12 col-lg-7 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-height: 450px;"
+                  src="{% static "/tests/cookbook/ll_delete_general.png" %}">
+              </div>
+            </div>
+            <hr>
+            <p><span class="badge badge-danger">Important</span> Always be careful when you try to modify a pointer. It
+              is easy to cause <strong>memory leak</strong>. What is a memory leak? When a dynamic allocated resource is
+              no longer accessible, the memory is considered as memory leak.</p>
+            </p>
+            <hr>
+            <p>
+              If we translate everything we said before to code, we will get the following.
+            <pre><code>Node* remove(Node* head, int target){
+  Node* prev = nullptr;
+  Node* current = head;
+
+  while(current != nullptr){
+    if (current->get_val() == target){
+      prev->set_next(current->get_next());
+      delete current;
+      return head;
+    }
+    prev = current;
+    current = current->get_next();
+  }
+  return head;
+}</code></pre>
+            </p>
+            <h5>5.2 Remove - Corner Cases</h4>
+              <p>What are we missing here? Corner Cases! Here consider some possible corner cases.</p>
+              <p>
+                What if the list is empty? Will our function behave correctly? If <code>head = nullptr</code>, the while
+                loop will not execute and straight return head. No problem here.
+              </p>
+              <p>
+                what if we need to delete the first node? Will there be any problem? Yes! If we are going to remove the
+                first node, then <code>current</code> and <code>prev</code> don't get set, we will execute the line
+                <code>prev->set_next(current->get_next());</code>. Since <code>prev = nullptr</code>, there will be a
+                runtime error. So what should we do here? Before we change the <code>next_node</code> of
+                <code>prev</code>, we need to make sure that <prev>prev</prev> isn't a <code>nullptr</code>, otherwise
+                we
+                may need to change the head instead of prev.
+              </p>
+              <p>Similarly, we can imagine that we need to remove the last node. If you go over the code you will see
+                there is nothing special deleting the last node.</p>
+              <p>Now, let's revise our code a bit to make it work in all situations without any error.
+
+              <pre><code>Node* remove(Node* head, int target){
+  Node* prev = nullptr;
+  Node* current = head;
+
+  while(current != nullptr){
+    if (current->get_val() == target){
+      // if delete first node, the head will point to the second node 
+      // after we removed the first node. However, we need to temporary 
+      // save the second node here before the first node gets deleted
+      if(prev == nullptr){
+        Node* ret_node = current->get_next();
+        delete current;
+        return ret_node;
+      }
+      prev->set_next(current->get_next());
+      delete current;
+      return head;
+    }
+    prev = current;
+    current = current->get_next();
+  }
+  return head;
+}</code></pre>
+              </p>
+              <h4>Exercises</h4>
+              <p>Here are some interesting things that you can do to a linked list and we will leave them to you to
+                solve
+                it. We believe you can do it =)</p>
+              <p>
+                1. Instead of remove only one node, can you remove all the nodes if the value of these nodes match the
+                target value?
+              </p>
+              <p>
+                2.1 Sort a linked list.
+              </p>
+              <p>
+                2.2 Sort a linked list, however at this time, you are not allowed to use more memory space than you
+                already have.(except define some temporary variable to help you solve the problem) Generally, in this
+                version of solution, your space complexity should be O(1).
+              </p>
+              <p>
+                3. To make our lives easier, is there anyway to make <code>insert()</code> takes only constant
+                time operation, or in another word, we want the time complexity of <code>insert()</code> to be O(1). You
+                can change the class definition of <code>Node</code>.
+              </p>
+              <p>
+                4. Implement a doubly linked list.
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- /container -->
+  </main>
+
+  <footer style="margin-bottom: 5%; margin-top: 5%;">
+    <hr>
+    <div style="text-align: center; padding-top: 30px;">
+      <p style="color: gray;">&copy; 2020 <a href="https://github.com/Louis-He/C_testing" target="_blank">Hello, C!
+          project</a></p>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+
+</html>

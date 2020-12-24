@@ -1,0 +1,202 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+  <title>Hello, C!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="/">Hello, C!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/syllabus">Syllabus</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/cookbook_index">CookBook! <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" style="margin-top: 80px; margin-bottom: 10%;">
+    <div style="margin: 50px">
+      <div class="row">
+        <div class="col-2" style="position: fixed;">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <div>
+              <a class="nav-link" href="/cookbook_index">Home</a>
+              <a class="nav-link" href="/cookbook_1_1">Hello World</a>
+              <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
+              <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
+              <a class="nav-link" href="/cookbook_3_1">&nbsp;&nbsp;&nbsp;&nbsp;Introduction</a>
+              <a class="nav-link" href="/cookbook_3_2">&nbsp;&nbsp;&nbsp;&nbsp;Address</a>
+              <a class="nav-link" href="/cookbook_3_3">&nbsp;&nbsp;&nbsp;&nbsp;Array</a>
+              <a class="nav-link active" href="/cookbook_3_4">&nbsp;&nbsp;&nbsp;&nbsp;Dynamic Memory</a>
+              <a class="nav-link" href="/cookbook_4_1">Objects</a>
+              <a class="nav-link" href="/cookbook_5_1">Data Structure</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-2" style="visibility: hidden;"></div>
+        <div class="col-10">
+          <div style="text-align: right;">
+            <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
+              src="https://avatars0.githubusercontent.com/u/28524641?s=460&u=ea270bcbecf0d9af97c2898aabd46370d07a1c46&v=4">
+            <p style="font-size: small; color: gray;">This page was contribucted by <a
+                href="https://github.com/Louis-He">Louis-He</a>. Late updated on Dec. 2nd, 2020.</p>
+          </div>
+          <hr>
+          <div class="tab-content">
+            <div class="alert alert-warning" role="alert">
+              This page is for C++ only. However, we may add code for C later.
+            </div>
+            <h4>Dynamic Allocated Memory</h4>
+            <div class="row">
+              <div class="col-6 col-lg-8 col-xl-9">
+                <p>Before we talk about dynamic allocated memory, we need to understand how the memory is allocated
+                  during the execution of our program. How the memory layout looks like.
+                </p>
+                <p>
+                  There are five parts of memory space, what we care most about are stack and heap. Let me first
+                  introduce what each chunk of memory represents.
+                  <li>Stack: Variables in your program during runtime, local variables, caller's return address, and
+                    etc. If grows from top to lower address.</li>
+                  <li>Heap: Dynamic allocated memory space. Grows from bottom to higher address.</li>
+                  <li>BSS: Uninitialized static variables, will be filled with zero.</li>
+                  <li>Data: Initialized static variables.</li>
+                  <li>Text: Instructions of your program.</li>
+                </p>
+              </div>
+              <div class="col-6 col-lg-4 col-xl-3 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-height: 300px"
+                  src="{% static "/tests/cookbook/memory_layout.png" %}">
+              </div>
+            </div>
+
+            <p>
+              Now let's move on to dynamic allocated memory. If you choose to allocate a memory dynamically, then you
+              need to take care of these memory blocks yourself. During runtime, only memory on the stack will be
+              automatically deleted if out of scope. You need to free the dynamic allocated memory if you think the
+              memory is no longer helpful for your program, otherwise it may cause memory leak. We will explain in
+              detail later. First, how can we dynamically allocate a memory block?
+
+            <pre class="cpp"><code>int main(){
+  int * a = new int(5);
+  return 0;
+}</code></pre>
+
+
+            </p>
+
+            <div class="row">
+              <div class="col-6 col-lg-8 col-xl-9">
+                <p>Here, we see a new keyword <code>new</code>. With this keyword, you can dynamically allocate a memory
+                  block, and it will return you a pointe that points to the allocated memory address. What actually
+                  happens inside the memory is represented by the diagram on the right side. This is how the memory
+                  looks like just before the program exits. You can see there is a dynamically allocated integer memory
+                  space on the heap, and our integer pointer points to that memory space.
+                </p>
+              </div>
+              <div class="col-6 col-lg-4 col-xl-3 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-height: 300px"
+                  src="{% static "/tests/cookbook/dynamic_example.png" %}">
+              </div>
+            </div>
+
+
+            <h4>Memory leak</h4>
+            <p>
+              Let's see a program below, can you spot any problem with the program?
+            <pre class="cpp"><code>
+int main(){
+  int b = 10;
+  int* a_ptr = new int(10);
+  a_ptr = &#38;b;
+  return 0;
+}</code></pre>
+            Everything is fine until you set <code>a_ptr</code> to point to the address of <code>b</code>. Note that the
+            memory dynamically allocated on the heap should be taken care by the programmer. Therefore, you will see
+            that there is a block of memory (allocated by <code>new int(10)</code>) on the heap but you can no longer
+            get access to it. In another sentence, you put this block of memory somewhere but you don't know where
+            anymore. I always love to give an analogy.
+            </p>
+            <p>
+              When you are taking some exam. You encounter a problem. You may remember that you reviewed this kind of
+              question, maybe on page xxx of textbook xxx and you stored that Knowledge in your brain but somewhat you
+              can't get access to it. You know you know, but at that point, you don't know where the material is stored
+              in your brain. From another point of view, you wasted part of your brain to store something that you are
+              unable to access. This is a kind of waste of resource, which we called memory leak in programming world.
+              (Not sure if there is a term in neurology)
+            </p>
+            <p>
+              To avoid this from happening, always be careful to the memory space that is dynamically allocated. Delete
+              the space after the memory is no longer useful. How to delete it, it is fairly simple.
+            <pre class="cpp"><code>int main(){
+  int b = 10;
+  int* a_ptr = new int(10);
+  delete a_ptr;
+  a_ptr = &#38;b;
+  return 0;
+}</code></pre>
+            </p>
+
+            <h4>Dynamic Allocated Array</h4>
+            <p>
+              There is not much difference here if you understand how array works. I will just share some code. The code
+              shows how to allocate an array and how to properly delete an array with no memory leak.
+            <pre class="cpp"><code>int main(){
+  int* arr = new int[10]; //dynamically allocate an array with 10 int space
+  delete arr[]; // delete the whole array
+  // note: delete arr will only delete the first element of the array, and will cause 9 blocks to have memory leak
+  return 0;
+}</code></pre>
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- /container -->
+  </main>
+
+  <footer style="margin-bottom: 5%; margin-top: 5%;">
+    <hr>
+    <div style="text-align: center; padding-top: 30px;">
+      <p style="color: gray;">&copy; 2020 <a href="https://github.com/Louis-He/C_testing" target="_blank">Hello, C!
+          project</a></p>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+
+</html>

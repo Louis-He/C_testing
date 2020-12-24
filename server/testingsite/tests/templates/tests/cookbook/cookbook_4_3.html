@@ -1,0 +1,442 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+  <title>Hello, C!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="/">Hello, C!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/syllabus">Syllabus</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/cookbook_index">CookBook! <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" style="margin-top: 80px; margin-bottom: 10%;">
+    <div style="margin: 50px">
+      <div class="row">
+        <div class="col-2" style="position: fixed;">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link" href="/cookbook_index">Home</a>
+            <a class="nav-link" href="/cookbook_1_1">Hello World</a>
+            <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
+            <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
+            <a class="nav-link" href="/cookbook_4_1">Objects</a>
+            <a class="nav-link" href="/cookbook_4_1">&nbsp;&nbsp;&nbsp;&nbsp;OOP Introduction</a>
+            <a class="nav-link" href="/cookbook_4_2">&nbsp;&nbsp;&nbsp;&nbsp;Member Function</a>
+            <a class="nav-link active" href="/cookbook_4_3">&nbsp;&nbsp;&nbsp;&nbsp;Inheritance</a>
+            <a class="nav-link" href="/cookbook_4_4">&nbsp;&nbsp;&nbsp;&nbsp;Polymorphism</a>
+            <a class="nav-link" href="/cookbook_5_1">Data Structure</a>
+          </div>
+        </div>
+        <div class="col-2" style="visibility: hidden;"></div>
+        <div class="col-10">
+          <div style="text-align: right;">
+            <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
+              src="https://avatars0.githubusercontent.com/u/28524641?s=460&u=ea270bcbecf0d9af97c2898aabd46370d07a1c46&v=4">
+            <p style="font-size: small; color: gray;">This page was contributed by <a
+                href="https://github.com/Louis-He">Louis-He</a>. Late updated on Nov. 29th, 2020.</p>
+          </div>
+          <hr>
+          <div class="tab-content">
+            <div class="alert alert-warning" role="alert">
+              This page is for C++ only. C is not object oriented.
+            </div>
+            <h4>Inheritance</h4>
+            <p>Inheritance is one of the most important concepts in Object Oriented Programming. Inheritance means that
+              users can define a class based on another class so that more codes can be reused. Let's look at an example
+              to see what inheritance is</p>
+            <p>
+              Here, let's define a class called <code>shape</code>. In that class, we have some data members
+              describing some properties of shape.
+            <pre><code>class shape{
+  std::string type;
+  int area;
+  int id;
+};
+</code></pre>
+            </p>
+            <p>
+              If I want to define a class called <code>circle</code>, I may need to define its radius. If I want to
+              define a class called <code>rectangle</code>, I may need to define the length of its side a and side b.
+              If I want to define a class called <code>triangle</code>, I may need to define its side length (Here we
+              assume the triangle is equilateral triangle). However, we may notice that no matter which shape I'm trying
+              to define, we always need to record its type, area, and id just as the data members we listed for class
+              <code>shape</code>. Of course, we can copy and paste the code three times, but we can only write once and
+              use it. Now, let me introduce <strong>Inheritance</strong>.
+            </p>
+            <p>
+            <h4>Inheritance Structure - <code>class derived:type base</code></h4>
+
+            <div class="row">
+              <div class="col-6 col-lg-8 col-xl-9">
+                <pre><code>class shape{
+public:
+    std::string type;
+    int area;
+    int id;
+};
+  
+class circle:public shape{
+public:
+    int radius;
+};</code></pre>
+              </div>
+              <div class="col-6 col-lg-4 col-xl-3 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" src="{% static "/tests/cookbook/Inheritance_structure.png" %}">
+              </div>
+            </div>
+
+            First let's see the syntax of the inheritance. First, we need to specify the base class and the one we want
+            to derive from that base class. Also, we need to specify whether it is a public/protected/private
+            inheritance. <strong>Most of the time, we will use public inheritance.</strong> And we will also continue
+            only considering public inheritance. You may need to ask what is the difference between them.
+            <li><code>public</code> (eg. <code>class circle:public shape</code>) - all the members in the base class
+              will have the same access control as they are. i.e. <code>public</code> will remain <code>public</code>,
+              <code>protected</code> will remain <code>protected</code>, and <code>private</code> will remain
+              <code>private</code>.
+            </li>
+            <li><code>protected</code> (eg. <code>class circle:protected shape</code>) - all the members in the base
+              class will have at most <code>protected</code> access control. i.e. <code>public</code> and
+              <code>protected</code> will be <code>protected</code>, and private will remain <code>private</code>.
+            </li>
+            <li><code>private</code> (eg. <code>class circle:private shape</code>) - all the members in the base class
+              will have at most <code>private</code> access control. i.e. <code>public</code>, <code>protected</code>
+              and <code>private</code> will all become <code>private</code>.
+            </li>
+            Now, let's continue and implement all the base class and inherited classes.
+            </p>
+
+            <h4>Inherit data member</h4>
+            <p>
+            <pre class="cpp"><code>int main(){
+  circle A = circle();
+  A.id = 1;
+  return 0;
+}</code></pre>
+            Notice that we can Inherit data members from base class, and this is the reason that we don't have to
+            rewrite the code again and again. Here, <code>circle</code> doesn't have data member <code>id</code>,
+            however, its base class <code>shape</code> has, and <code>circle</code> inherited from <code>shape</code>.
+            </p>
+
+            <h4>Data member access control</h4>
+            <p>
+              Data members in class can also have different access control: <code>public</code>, <code>protected</code>
+              and <code>private</code>. What are the difference?
+              <li>
+                <code>public</code> means that the member data can be accessed anywhere.
+              </li>
+              <li>
+                <code>protected</code> means that the member data can not be accessed from outside the class or the
+                derived class.
+              </li>
+              <li>
+                <code>private</code> means that the member data can only be accessed from inside of the class. They
+                can't be accessed even by its own derived class.
+              </li>
+              The following example will explain what the difference is.
+            <pre><code>class shape{
+private:
+  std::string type;
+protected:
+  int area;
+public:
+  int id;
+};
+
+class circle:public shape{
+public:
+  int radius;
+
+  void foo(){
+      id = 1; // correct, id is public
+      area = 1; // correct, area is protected
+      type = "A"; // error, type is private
+  }
+};
+
+int main(){
+  circle A;
+  A.id = 1; // correct, id is public
+  A.radius = 1; // correct, radius is public
+  A.area = 1; // error, area is protected
+  A.type = "A"; // error, type is private
+  return 0;
+}</code></pre>
+            </p>
+
+
+            <h4>Inheritance Constructor Behavior</h4>
+            <p>
+              We are going to use the following code to demonstrate the behavior of the constructors of base class and
+              derived class.
+            <pre><code>class shape{
+public:
+    std::string type;
+    int area;
+    int id;
+
+    shape();
+    shape(int _id);
+};
+
+class circle:public shape{
+public:
+    int radius;
+
+    circle();
+    circle(int _id);
+};
+
+// base default constructor
+shape::shape(){
+    id = -1;
+    std::cout &lt;&lt; "Shape Constructor" &lt;&lt; std::endl;
+}
+
+// base parameterized constructor
+shape::shape(int _id){
+    id = _id;
+    std::cout &lt;&lt; "Shape Parameterized Constructor" &lt;&lt; std::endl;
+}
+
+// derived default constructor
+circle::circle() {
+    std::cout &lt;&lt; "Circle Constructor" &lt;&lt; std::endl;
+}
+
+// derived parameterized constructor
+circle::circle(int _id): shape(_id) {
+    std::cout &lt;&lt; "Circle Parameterized Constructor" &lt;&lt; std::endl;
+}</code></pre>
+            First, I will explain the meaning of each function. There are two constructors in <code>shape</code>, they
+            are the ones we already familiar with. One is the default constructor, and the other one is a constructor
+            with one parameter. There are also two constructors in <code>circle</code>, one default constructor, and the
+            other one is a constructor with one parameter. However, this function
+            <code>circle::circle(int _id) : shape(_id)</code> looks a bit different than what we learned before. This
+            line means that we are going to call <code>shape(int _id)</code> before actually running anything inside
+            <code>circle(int _id)</code>.
+            </p>
+            <p>
+              It is always abstract to talk about concepts, the following is an sample main program. Before scroll down
+              to further explanation, guess what the output will be.
+
+            <pre><code>int main(){
+  circle A = circle();
+  std::cout &lt;&lt; A.id &lt;&lt; std::endl;
+  circle B = circle(2);
+  std::cout &lt;&lt; B.id &lt;&lt; std::endl;
+  return 0;
+}</code></pre>
+            </p>
+            <p>
+              The output is as following:
+            <pre><code>Shape Constructor
+Circle Constructor
+-1
+Shape Parameterized Constructor
+Circle Parameterized Constructor
+2</code></pre>
+            </p>
+            <p>
+              As you can see from the output above, when you instantiate a derived class, the base class constructor
+              will be called.
+            </p>
+            <hr>
+            <p>
+              <span class="badge badge-danger">Important</span> Base class constructor is always called before a
+              derived class constructor is called. <strong>By default, the derived class constructor will call default
+                base class constructor.</strong> If you want to call parameterized base class constructor, you need to
+              specify it. E.g. <code>circle::circle(int _id): shape(_id)</code>. This circle constructor called
+              parameterized base class constructor.
+            </p>
+            <hr>
+            <h4>Inheritance Destructor Behavior - <code>~class_name</code></h4>
+            <p>
+              Destructor for derived class has the same format as the one we already learned. Let's define the
+              destructors for <code>shape</code> and <code>circle</code> also along with a main program. What will the
+              output be?
+            <pre><code>shape::~shape(){
+  std::cout &lt;&lt; "Shape Destructor" &lt;&lt; std::endl;
+}
+circle::~circle(){
+  std::cout &lt;&lt; "Circle Destructor" &lt;&lt; std::endl;
+}</code></pre>
+            <pre><code>int main(){
+  circle A = circle();
+  std::cout &lt;&lt; A.id &lt;&lt; std::endl;
+  return 0;
+}</code></pre>
+            </p>
+            <p>
+              Output:
+            <pre><code>Shape Constructor
+Circle Constructor
+-1
+Circle Destructor
+Shape Destructor</code></pre>
+            As we can see from the output, the flow of calling destructors are similar to the one of calling
+            constructors. In constructor, the base class constructor will be called before derived class is called. In
+            destructor, the derived class destructor will be called before base class
+            constructor is called. This kind of behavior is called "LIFO", related data structure is <a
+              href="http://www.cplusplus.com/reference/stack/stack/">stack</a>.
+            </p>
+
+            <div class="row">
+              <div class="col-6 col-lg-8 col-xl-9">
+                Let me bring up the diagram from before. Why the constructor and destructor behave in this way? Well,
+                you first need to build the first floor of a building and then build the second floor. When you want to
+                demolish the building, you need to first take down the second floor then first floor.
+              </div>
+              <div class="col-6 col-lg-4 col-xl-3 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" src="{% static "/tests/cookbook/Inheritance_structure.png" %}">
+              </div>
+            </div>
+
+            <h4>Function Override</h4>
+            <p>
+              Before, we showed that member data can be inherited and reused. And this is the same for member
+              functions. You can use the functions inherited from the base class. However, you may find that the
+              functions from parent class is not enough for you, then you have the right to <strong>override</strong>
+              them.
+            </p>
+
+            <p>
+              First, we defined a <code>print()</code> function for class <code>shape</code>. Also, we keep all the
+              constructors and destructors. What will be the output of the following main function?
+            <pre class="cpp"><code>void shape::print() {
+  std::cout &lt;&lt; "Print from shape" &lt;&lt; std::endl;
+}</code></pre>
+            <pre><code>int main(){
+  shape A;
+  A.print();
+  circle B;
+  B.print();
+  return 0;
+}</code></pre>
+            </p>
+            <p>
+              Output:
+            <pre><code>Shape Constructor
+Print from shape
+Shape Constructor
+Circle Constructor
+Print from shape
+Circle Destructor
+Shape Destructor
+Shape Destructor</code></pre>
+            Here, <code>A</code> is instantiated first so first we will call the constructor of <code>A</code> which is
+            <code>shape</code>. Next, <code>A</code> called its <code>print</code> function. <code>B</code> is
+            instantiated, so we need to call its own constructor, but before that we need to call its base class
+            constructor. Then <code>B</code> called <code>print()</code>. Although we don't have any
+            <code>print()</code> member function under class <code>circle</code>. There is one under <code>shape</code>.
+            Because <code>circle</code> is a derived class from <code>shape</code>, all the member functions will be
+            inherited by default. When <code>B</code> called <code>print()</code>, it actually called the member
+            function in <code>shape</code>. You may ask can I rewrite <code>print()</code>? Yes! Of course, this is
+            called <strong>function override</strong>. Let's define our <code>print()</code> function in class
+            <code>circle</code>.
+            </p>
+            <p>
+            <pre><code>void circle::print(){
+  std::cout &lt;&lt; "Print from circle" &lt;&lt; std::endl;
+}</code></pre>
+            Now, the output will change to ... (We filtered out all constructors' and destructors' output)
+            <pre><code>Print from shape
+Print from circle</code></pre>
+            </p>
+            <p>But if we want to first call the <code>print()</code> in shape and then define our own
+              <code>print()</code> for <code>circle</code>, what should I do? Well, you can always call the member
+              functions from base class using the form: /*base class name*/::/*function name*/. Let me give you a
+              concrete example.
+            <pre><code>void circle::print(){
+  shape::print();
+  std::cout &lt;&lt; "Print from circle" &lt;&lt; std::endl;
+}</code></pre>
+            Now the output will be... (We filtered out all constructors' and destructors' output)
+            <pre><code>Print from shape
+Print from shape
+Print from circle</code></pre>
+            </p>
+
+            <h4>Upcast and downcast</h4>
+            <p>
+              Here is a function that pass in a parameter of type <code>shape</code>.
+            <pre><code>void print_id(shape _in){
+  std::cout &lt;&lt; _in.id &lt;&lt; std::endl;
+}</code></pre>
+            The question is can I call the function with a parameter of type <code>circle</code>? Will the following
+            code compile and run without any error?
+            <pre><code>int main(){
+  circle B;
+  print_id(B);
+}</code></pre>
+            Well, the answer is yes to both these questions. Why? You can always upcast from derived class to its base
+            class. Because a derived object can be guaranteed to be a base class object. Remember that a base class
+            constructor is always called before a derived class constructor is called. However, doing so by upcasting
+            will lose some data, like <code>shape</code> data member in circle. It is something we have in
+            <code>circle</code> but not in <code>shape</code>.
+            </p>
+            <p>
+              Next question is that can this be reversed? Let's say we have a function
+              <code>void print_id(circle _in)</code>, can I pass in an object of type <code>shape</code>? This is called
+              downcast, you are trying to cast a base object to a derived object. Here, a base class object didn't call
+              the constructor of its derived class. We don't have the member data and member functions in derived class.
+              Doing so is prohibited and will give you a compile-time error.
+            </p>
+            <p>
+              But (there is always a but), if you know exactly what you are doing, you can use <code>dynamic_cast</code>
+              to do this. This is a more advanced topic in C++, we may talk about it after chapter Polymorphism.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- /container -->
+  </main>
+
+  <footer style="margin-bottom: 5%; margin-top: 5%;">
+    <hr>
+    <div style="text-align: center; padding-top: 30px;">
+      <p style="color: gray;">&copy; 2020 <a href="https://github.com/Louis-He/C_testing" target="_blank">Hello, C!
+          project</a></p>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+
+</html>

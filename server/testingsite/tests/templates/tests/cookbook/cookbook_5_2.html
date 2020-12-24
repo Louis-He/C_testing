@@ -1,0 +1,268 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+  <title>Hello, C!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="/">Hello, C!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/syllabus">Syllabus</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/cookbook_index">CookBook! <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" style="margin-top: 80px; margin-bottom: 10%;">
+    <div style="margin: 50px">
+      <div class="row">
+        <div class="col-2" style="position: fixed;">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link" href="/cookbook_index">Home</a>
+            <a class="nav-link" href="/cookbook_1_1">Hello World</a>
+            <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
+            <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
+            <a class="nav-link" href="/cookbook_4_1">Objects</a>
+            <a class="nav-link" href="/cookbook_5_1">Data Structure</a>
+            <a class="nav-link" href="/cookbook_5_1">&nbsp;&nbsp;&nbsp;&nbsp;Linked List</a>
+            <a class="nav-link active" href="/cookbook_5_2">&nbsp;&nbsp;&nbsp;&nbsp;Tree</a>
+          </div>
+        </div>
+        <div class="col-2" style="visibility: hidden;"></div>
+        <div class="col-10">
+          <div style="text-align: right;">
+            <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
+              src="https://avatars0.githubusercontent.com/u/28524641?s=460&u=ea270bcbecf0d9af97c2898aabd46370d07a1c46&v=4">
+            <p style="font-size: small; color: gray;">This page was contributed by <a
+                href="https://github.com/Louis-He">Louis-He</a>. Late updated on Nov. 22nd, 2020.</p>
+          </div>
+          <hr>
+          <div class="tab-content">
+            <div class="alert alert-warning" role="alert">
+              This page is for C++ only. However, we may add code for C later.
+            </div>
+            <h4>Tree</h4>
+            <p>Based on our understanding about linked list. We can now move to tree. In linked list, we only allow one
+              node connect to another node back to back (i.e. at most one in, one out). Now, let's consider a little
+              more generous situation. What if we allow one node to connect to multiple nodes (i.e. at most one in, but
+              multiple fanout). Then we will get a <strong>tree</strong>, a structure that is a bit smaller on top and
+              bit larger on the bottom, like a tree. And this is why we call it a tree. If all the nodes in a tree have
+              at most two fanout, we call it a <strong>tree</strong>. If for each node in a tree, its left node is
+              smaller than itself and its right node is larger than itself, we call it a <strong>binary search
+                tree</strong>(i.e. sorted binary tree).
+            </p>
+            <p>
+              Similar to linked list, we will talk about how each node looks like and how can we traverse a tree, insert
+              a node, search a node, and delete a node. In this chapter, we only focus on <strong>binary tree</strong>.
+              It will get a little more complicated if we have a general tree but the idea is the same.
+            </p>
+            <h4>Node in a binary tree</h4>
+            <p>
+              How a node in a binary tree looks like? Similar to linked list, but instead of having one pointer points
+              to the next node, now we have two pointers. One points to the left node, and the other one points to the
+              right node. The code shown below is for a binary tree that all the nodes can store one integer. For
+              terminologies, instead of calling previous node, current node, next node, we call them parent node, left
+              child and right child.
+            </p>
+            <div class="row">
+              <div class="col-12 col-lg-7 col-xl-8">
+                <pre class="cpp"><code>class Node{
+  // node itself
+  int val;
+  // left child
+  Node* left;
+  // right child
+  Node* right;
+}</code></pre>
+              </div>
+              <div class="col-12 col-lg-5 col-xl-4 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" src="{% static "/tests/cookbook/tree_node.png" %}">
+              </div>
+            </div>
+
+
+            <h4>Traverse a binary tree</h4>
+            <p>For a linked list, if we a head, there is only one way to traverse it. We can start from the head and go
+              all the way to the tail. However, if we have the root (i.e. the very top node of a tree) to a tree, we can
+              start from the left subtree, go back to root and continue going to the right subtree. Or we can go from
+              root, and then go to the left subtree and then the right one.
+            </p>
+            <p>
+              Now, let's introduce three different way to traverse a binary tree.
+            </p>
+            <h5>Inorder traversal</h5>
+            <p>
+              Inorder means we always visit the root node in the middle. The traversal order is as follows:<br>
+              1. Visit the left subtree.<br>
+              2. Visit the root of the tree.<br>
+              3. Visit the right subtree.<br>
+            </p>
+
+            <h5>Preorder traversal</h5>
+            <p>
+              Preorder means we always visit the root node at the very beginning. The traversal order is as follows:<br>
+              1. Visit the root of the tree.<br>
+              2. Visit the left subtree.<br>
+              3. Visit the right subtree.<br>
+            </p>
+
+            <h5>Postorder traversal</h5>
+            <p>
+              Postorder means we always visit the root node at the very end. The traversal order is as follows:<br>
+              1. Visit the left subtree.<br>
+              2. Visit the right subtree.<br>
+              3. Visit the root of the tree.<br>
+            </p>
+
+            <div class="row">
+              <div class="col-12 col-lg-5 col-xl-6">
+                <p>
+                  Notice that no matter what we always first go to the left subtree and then right subtree. Let's look
+                  at an actual example to help us understand how these traversal method works. Before we go to the
+                  answers to the questions, please take a piece of paper and try to figure out yourself. What will be
+                  the inorder, preorder and postorder traversal be like for the tree shown?
+                </p>
+                <p>
+                  <strong>Hint: </strong> Start from the root, when you try to traverse the left subtree, take the left
+                  child of the root as the new root. From there, you will have left child and right child. In fact, you
+                  can see that you can treat each node as a new root. Here, we need to use recursion to traverse a tree.
+                </p>
+              </div>
+              <div class="col-12 col-lg-7 col-xl-6 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-height: 250px;"
+                  src="{% static "/tests/cookbook/tree_example.png" %}">
+              </div>
+            </div>
+          </div>
+
+          <p>
+            So the inorder traversal to the above tree is: 3 1 9 4 2 7 8 5 6<br>
+            The preorder traversal is: 2 4 1 3 9 5 7 8 6<br>
+            The postorder traversal is: 3 9 1 4 8 7 6 5 2<br>
+          </p>
+          <p>
+            Some explanation to the above solution.<br>
+            Preorder traversal should be easy to do, always visit the root first and then left, then right.<br>
+            For the inorder traversal, we visit left first, so we will start from the left subtree of 2, which is node
+            4. When we are at node 4, we should still visit left first, which is node 1. Similarly, we should visit
+            left, which is node 3. At node 3, we see there is no child from node 3. Therefore, 3 is the first node to
+            print. and then we go back to root, which is 1. Now to can visit right, which is node 9. After finish
+            visiting all the subleft tree of node 4, we should go to the right subtree but it is empty. Therefore, the
+            left subtree of the root node is visited. Then we should go to the right subtree and go on and on...<br>
+            Using the similar logic, you should find postorder traversal is the same except we go visit right first and
+            go back to the root node.
+          </p>
+          <p>
+            Now let's see how we can write these down using c++ code.
+
+          <pre class="cpp"><code>void inorder(Node* root){
+  if(root == nullptr) return;
+  inorder(root->left);
+  cout &lt;&lt; root->val &lt;&lt; " ";
+  inorder(root->right);
+}</code></pre>
+          Similarly, you can change the place of <code>cout &lt;&lt; root->val &lt;&lt; " ";</code> to implement
+          preorder and postorder traversal.
+          </p>
+
+          <h4>Binary Search Tree</h4>
+          <p>Now, we move on to binary search tree. Here we will have more information about each node. We give the
+            meaning of what left subtree and right subtree are.
+          </p>
+          <p>
+            How to insert a new node? Notice that not matter what our new node will be a leaf. Therefore, we can start
+            from root, if the new node is smaller than the root, then we go left, vice versa. We can continue this until
+            we find a right place to insert the new node. Code as follows
+
+          <pre class="cpp"><code>void insert_node(Node* &head, int new_val){
+  Node* new_node = new Node(new_val);
+  if(head == nullptr){head = new_node;}
+  
+  // find the place where we should place the new node
+  Node* parent = nullptr;
+  Node* current = head;
+  while(current != nullptr){
+    parent = current;
+    if(new_val &lt; current->val){
+      current = current -> left;
+    }else if(new_val &gt; current->val){
+      current = current -> right;
+    }else{
+      delete new_node;
+      return; // already inserted
+    }
+  }
+
+  // should we insert left or right?
+  if(new_val &lt; parent->val){
+    parent -> left = new_node;
+  }else{
+    parent -> right = new_node;
+  }
+}</code></pre>
+
+          As you can see, we search the whole try to find a right place to insert the new node. It is very very similar
+          to search a node in a binary search tree. We will leave it as an exercise to the reader.
+          </p>
+
+          <p>
+            Besides inserting a new node in a binary search tree, we can also delete a node. However deleting a node in
+            a tree is not that easy and there can be a lot of ways to do it. We will not introduce how to delete a node
+            due to its complexity. If you are interested in deleting a node, please visit <a
+              href="https://visualgo.net/en/bst">Visual Algo - BST</a> for more information.
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- /container -->
+  </main>
+
+  <footer style="margin-bottom: 5%; margin-top: 5%;">
+    <hr>
+    <div style="text-align: center; padding-top: 30px;">
+      <p style="color: gray;">&copy; 2020 <a href="https://github.com/Louis-He/C_testing" target="_blank">Hello, C!
+          project</a></p>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+
+</html>

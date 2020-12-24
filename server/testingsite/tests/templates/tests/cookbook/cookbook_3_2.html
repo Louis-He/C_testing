@@ -1,0 +1,422 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+  <title>Hello, C!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="/">Hello, C!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/syllabus">Syllabus</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/cookbook_index">CookBook! <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" style="margin-top: 80px; margin-bottom: 10%;">
+    <div style="margin: 50px">
+      <div class="row">
+        <div class="col-2" style="position: fixed;">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <div>
+              <a class="nav-link" href="/cookbook_index">Home</a>
+              <a class="nav-link" href="/cookbook_1_1">Hello World</a>
+              <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
+              <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
+              <a class="nav-link" href="/cookbook_3_1">&nbsp;&nbsp;&nbsp;&nbsp;Introduction</a>
+              <a class="nav-link active" href="/cookbook_3_2">&nbsp;&nbsp;&nbsp;&nbsp;Address</a>
+              <a class="nav-link" href="/cookbook_3_3">&nbsp;&nbsp;&nbsp;&nbsp;Array</a>
+              <a class="nav-link" href="/cookbook_3_4">&nbsp;&nbsp;&nbsp;&nbsp;Dynamic Memory</a>
+              <a class="nav-link" href="/cookbook_4_1">Objects</a>
+              <a class="nav-link" href="/cookbook_5_1">Data Structure</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-2" style="visibility: hidden;"></div>
+        <div class="col-10">
+          <div style="text-align: right;">
+            <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
+              src="https://avatars0.githubusercontent.com/u/28524641?s=460&u=ea270bcbecf0d9af97c2898aabd46370d07a1c46&v=4">
+            <p style="font-size: small; color: gray;">This page was contribucted by <a
+                href="https://github.com/Louis-He">Louis-He</a>. Late updated on Nov. 30th, 2020.</p>
+          </div>
+          <hr>
+          <div class="tab-content">
+            <div class="alert alert-warning" role="alert">
+              This page is for C++ only. However, we may add code for C later.
+            </div>
+            <h4>Pointer</h4>
+            <p>
+              Before we dive into address, pointer and reference all these mess. I would like you to consider a
+              scenario. Within each condo, there is a room number for each room. People live in different rooms with
+              different room number. Now consider the building as the memory in your PC. The room numbers are the
+              <strong>address</strong>. The people living in the room are the content stored inside each
+              block of memory. With this analogy, I think now you may have a better understanding of what the
+              address is and how data are stored.
+            </p>
+            <p>
+              Now, let's see what a point is. A <strong>pointer</strong> is a address that points to one block of
+              content in the memory, just like the room number. How we write it down in C or C++?
+            <pre class="cpp"><code>int* a = nullptr;</code></pre>
+            We add a star (*) after the variable type. Also, there is another new keyword <code>nullptr</code>.
+            <code>nullptr</code> is a special pointer that points to the memory address 0x0 to indicate that the pointer
+            is not assigned to any other address.
+            </p>
+            <p>
+              How are we going to use a pointer in our program and what kind of convenience that it can bring to us?
+
+            <h5>Address-of and dereference operators</h5>
+            <div class="row">
+              <div class="col-6 col-lg-8 col-xl-9">
+                <pre class="cpp"><code>int main(){
+  int a = 0;
+  int* a_ptr = &#38;a;
+  int b = *a_ptr;
+  return 0;
+}</code></pre>
+              </div>
+              <div class="col-6 col-lg-4 col-xl-3 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-height: 200px;"
+                  src="{% static "/tests/cookbook/ptr_intro.png" %}">
+              </div>
+            </div>
+            In the memory, pointer is actually just an integer that stored the address of the content that the pointer
+            points to. Here, we declared a variable of type int, and a pointer that points to a variable of type int.
+            This symbol "&#38;" that we write before a variable is called <strong>"address-of operator"</strong>. This
+            operator will return the address of the variable that follows this symbol.
+            </p>
+            <p>
+              We have the operator that can get the address of a variable, then we must have an operator that does all
+              the way around, symbol "*" that we write before a variable is called <strong>"dereference
+                operator"</strong>. This operator will return the content from the address that the following variable
+              points.
+            </p>
+            <p>
+              Basically, the above code creates an integer variable, we stored its address and then get the content out
+              from that address.
+            </p>
+            <p><span class="badge badge-danger">Important</span> Notice that we have "*" in <code>int*</code> and also
+              "*" in <code>*a_ptr</code>. These two "*" are <strong style="color: red;">NOT</strong> the same operator.
+              The before one is used in variable declaration which indicates the variable is a pointe type. The latter
+              one is used before an already defined variable which is used to extract the content from the memory block.
+            </p>
+
+            <h4>Reference</h4>
+            <p>Besides pointer, we also have reference in C++. It is very similar to pointer but not the same thing.</p>
+
+
+            <div class="row">
+              <div class="col-6 col-lg-8 col-xl-9">
+                <pre class="cpp"><code>int main(){
+  int a = 0;
+  int& ref_a = a;
+  ref_a = 2; // a will also become 2
+  int b = ref_a; // b = the value of a
+  return 0;
+}</code></pre>
+              </div>
+              <div class="col-6 col-lg-4 col-xl-3 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-height: 200px;"
+                  src="{% static "/tests/cookbook/ref_intro.png" %}">
+              </div>
+            </div>
+            <p>
+              Here, you can see the symbol "&#38;" after the variable type <code>int</code>. When there is an "&#38;"
+              after the type when a new variable is declared, it means this is a reference. This is <strong>different
+                from</strong> the "address-of" operator where it is used before the variable name. All the other syntax
+              are the same as those for value variables.
+            </p>
+            <p>
+              What is a reference? For example, one of your friends named Catherine. You may call her Cathy, or Cath.
+              Here, we can treat Catherine as a variable, Cathy and Cath as two reference to Catherine. They mean the
+              same thing but with different words.
+            </p>
+            <p>
+              Unlike pointers, reference actually doesn't take memory (most of the time). The compiler will optimize it
+              away because it behaves like an alias to another variable. See the code above. <code>ref_a</code> is an
+              integer reference that is an alias of variable <code>a</code>. When you modify ref_a, it will also modify
+              a.
+            </p>
+
+            <h4>Pass by Pointers and Reference</h4>
+            <h5>Pass by Pointers</h5>
+            <p>
+              We know that we can pass a variable value into a function by using parameters, for example,
+              <code>int foo(int a);</code>. Here, we pass an integer value into the function <code>foo</code>. Can we do
+              the same thing for an integer? Yes!
+            </p>
+            <pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+
+void increment(int* a);
+
+int main(){
+  int a = 0;
+  increment(&a);
+  cout &lt;&lt; a &lt;&lt; endl;
+  return 0;
+}
+
+void increment(int* a){
+  (*a)++;
+}</code></pre>
+            <p>
+              Before we continue, can you guess what the output should be? If we change the function to pass by value
+              which means the following code, it should print 0 right? Because the variable <code>a</code> inside the
+              function <code>increment</code> is different than the one from the <code>main()</code>. Hence the variable
+              <code>a</code> inside main will remain the same.
+            </p>
+            <pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+
+void increment(int a);
+
+int main(){
+  int a = 0;
+  increment(a);
+  cout &lt;&lt; a &lt;&lt; endl;
+  return 0;
+}
+
+void increment(int a){
+  a++;
+}</code></pre>
+            <p>
+              Then what may change if we pass a pointer into the function? I will draw the memory block to show what
+              exactly happened step by step. The left side is for pass by pointer function, the right side is for pass
+              by value function.
+            </p>
+            <li>Before called function <code>increment</code></li>
+            <div class="row">
+              <div class="col-6 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-width: 400px;"
+                  src="{% static "/tests/cookbook/inc_val_3.png" %}">
+              </div>
+              <div class="col-6 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-width: 400px;"
+                  src="{% static "/tests/cookbook/inc_val_3.png" %}">
+              </div>
+            </div>
+            <li>Right after called function <code>increment</code></li>
+            <div class="row">
+              <div class="col-6 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-width: 400px;"
+                  src="{% static "/tests/cookbook/inc_ptr_1.png" %}">
+              </div>
+              <div class="col-6 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-width: 400px;"
+                  src="{% static "/tests/cookbook/inc_val_1.png" %}">
+              </div>
+            </div>
+            <li>before returned from function <code>increment</code></li>
+            <div class="row">
+              <div class="col-6 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-width: 400px;"
+                  src="{% static "/tests/cookbook/inc_ptr_2.png" %}">
+              </div>
+              <div class="col-6 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-width: 400px;"
+                  src="{% static "/tests/cookbook/inc_val_2.png" %}">
+              </div>
+            </div>
+            <li>After returned from function <code>increment</code></li>
+            <div class="row">
+              <div class="col-6 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-width: 400px;"
+                  src="{% static "/tests/cookbook/inc_ptr_3.png" %}">
+              </div>
+              <div class="col-6 align-self-center" style="text-align: center;">
+                <img class="img-fluid mx-auto" style="max-width: 400px;"
+                  src="{% static "/tests/cookbook/inc_val_3.png" %}">
+              </div>
+            </div>
+
+            <p>
+              Identified where the differences are? When you pass a pointer into a function, there will be a new memory
+              block for the pointer, and points to the memory block that you want to manipulate. In the above case, you
+              want to increment the value of variable <code>a</code> in the main function. You can then pass in the
+              memory block that stores the variable <code>a</code> using pointer we just learned.
+            </p>
+
+            <h5>Pass by References</h5>
+            <p>
+              Similarly we can pass a reference as a parameter to the function. We will change the code a bit but we
+              will still do the same thing which wants to increment the value.
+            </p>
+            <pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+
+void increment(int& a);
+
+int main(){
+  int a = 0;
+  increment(a);
+  cout &lt;&lt; a &lt;&lt; endl;
+  return 0;
+}
+
+void increment(int& a){
+  a++;
+}</code></pre>
+            <p>What happened inside the memory? This time I want to compare the code with the normal pass by value
+              function that can increment the value(notice that in the previous example, the pass by value function
+              doesn't complete its job). The code is as follows.
+            </p>
+            <pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int increment(int a);
+
+int main(){
+  int a = 0;
+  a = increment(a);
+  cout &lt;&lt; a &lt;&lt; endl;
+  return 0;
+}
+
+int increment(int a){
+  a++;
+  return a;
+}</code></pre>
+          </div>
+          <p>
+            The left side is for pass by reference function, the right side is for pass
+            by value function.
+          </p>
+
+          <li>Before called function <code>increment</code></li>
+          <div class="row">
+            <div class="col-6 align-self-center" style="text-align: center;">
+              <img class="img-fluid mx-auto" style="max-width: 400px;"
+                src="{% static "/tests/cookbook/inc_val_3.png" %}">
+            </div>
+            <div class="col-6 align-self-center" style="text-align: center;">
+              <img class="img-fluid mx-auto" style="max-width: 400px;"
+                src="{% static "/tests/cookbook/inc_val_3.png" %}">
+            </div>
+          </div>
+          <li>Right after called function <code>increment</code></li>
+          <div class="row">
+            <div class="col-6 align-self-center" style="text-align: center;">
+              <img class="img-fluid mx-auto" style="max-width: 400px;"
+                src="{% static "/tests/cookbook/inc_ref_1.png" %}">
+            </div>
+            <div class="col-6 align-self-center" style="text-align: center;">
+              <img class="img-fluid mx-auto" style="max-width: 400px;"
+                src="{% static "/tests/cookbook/inc_val_1.png" %}">
+            </div>
+          </div>
+          <li>before returned from function <code>increment</code></li>
+          <div class="row">
+            <div class="col-6 align-self-center" style="text-align: center;">
+              <img class="img-fluid mx-auto" style="max-width: 400px;"
+                src="{% static "/tests/cookbook/inc_ref_2.png" %}">
+            </div>
+            <div class="col-6 align-self-center" style="text-align: center;">
+              <img class="img-fluid mx-auto" style="max-width: 400px;"
+                src="{% static "/tests/cookbook/inc_val_2.png" %}">
+            </div>
+          </div>
+          <li>After returned from function <code>increment</code></li>
+          <div class="row">
+            <div class="col-6 align-self-center" style="text-align: center;">
+              <img class="img-fluid mx-auto" style="max-width: 400px;"
+                src="{% static "/tests/cookbook/inc_ptr_3.png" %}">
+            </div>
+            <div class="col-6 align-self-center" style="text-align: center;">
+              <img class="img-fluid mx-auto" style="max-width: 400px;"
+                src="{% static "/tests/cookbook/inc_ptr_3.png" %}">
+            </div>
+          </div>
+
+          <p>Notice here I drew the arrow to point to the name to represent reference, instead of pointing to the value
+            to represent pointer. When you pass in a reference, remember that you are just feeding in an alias. This
+            means if you want to change the reference, you are changing the value of the variable that your reference
+            represents.</p>
+
+
+          <h5>Difference between pass by value and pass by reference/pointer</h5>
+          <p>
+            To give a simple answer. There will be a copy of the parameter if your function is passed by value, and
+            there will be no copy if the function is passed by reference/pointer. This makes extreme difference when you
+            pass in an object. If the function is passed by value, then copy constructor will be called implicitly to
+            make a copy of your parameter.
+          </p>
+
+
+          <h4>Dangling Pointer</h4>
+          <p>
+            Is it always safe to return a pointer? See the code below.
+          <pre class="cpp"><code>int* foo(){
+  int a = 10;
+  return &#38;a;
+}
+
+int main(){
+  int* ptr = foo();
+  cout &lt;&lt; *ptr &lt;&lt; endl;
+  return 0;
+}</code></pre>
+          What will happen if you call this function? When you are inside function <code>foo</code>, there will be a new
+          local variable <code>a</code>, and the address of this local variable is returned and pass back to the
+          caller(in this case, main function). Everything is good before the local variable is deleted after returning
+          to the new function. Now <code>ptr</code> in the main function points to an address that doesn't belong to the
+          program anymore, called <strong>Dangling pointer</strong>. The local variable <code>a</code> is out of scope
+          and automatically deleted. When you try to print the value of the memory block that <code>ptr</code> belongs
+          to, there is a possibility that you will encounter segmentation fault. This is an unsafe behavior and should
+          be treated as a bug.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- /container -->
+  </main>
+
+  <footer style="margin-bottom: 5%; margin-top: 5%;">
+    <hr>
+    <div style="text-align: center; padding-top: 30px;">
+      <p style="color: gray;">&copy; 2020 <a href="https://github.com/Louis-He/C_testing" target="_blank">Hello, C!
+          project</a></p>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+
+</html>
