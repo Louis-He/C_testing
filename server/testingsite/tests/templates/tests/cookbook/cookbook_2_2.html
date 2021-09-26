@@ -1,10 +1,127 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+  <title>Hello, C!</title>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 10px;
+    }
+  </style>
 </head>
+
 <body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="/">Hello, C!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/syllabus">Syllabus</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/cookbook_index">CookBook! <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" style="margin-top: 80px;">
+    <div style="margin: 50px">
+      <div class="row">
+        <div class="col-2" style="position: fixed;">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link" href="/cookbook_index">Home</a>
+            <a class="nav-link" href="/cookbook_1_1">Hello World</a>
+            <a class="nav-link" href="/cookbook_2_1">Basic Knowledge</a>
+            <a class="nav-link" href="/cookbook_2_1">&nbsp;&nbsp;&nbsp;&nbsp;Data Type</a>
+            <a class="nav-link active" href="/cookbook_2_2">&nbsp;&nbsp;&nbsp;&nbsp;Compilation</a>
+            <a class="nav-link" href="/cookbook_3_1">Memory Management</a>
+            <a class="nav-link" href="/cookbook_4_1">Objects</a>
+            <a class="nav-link" href="/cookbook_5_1">Data Structure</a>
+          </div>
+        </div>
+        <div class="col-2" style="visibility: hidden;"></div>
+        <div class="col-10">
+          <div style="text-align: right;">
+            <img class="img-fluid mx-auto" style="height: auto; width: 60px; border-radius: 30px;"
+              src="https://avatars0.githubusercontent.com/u/28524641?s=460&u=ea270bcbecf0d9af97c2898aabd46370d07a1c46&v=4">
+            <p style="font-size: small; color: gray;">This page was contributed by <a
+                href="https://github.com/Louis-He">Louis-He</a>. Late updated on sep. 26th, 2021.</p>
+          </div>
+          <hr>
+          <div class="tab-content">
+            <h4>Compilation</h4>
+            <p>
+              Programs written in C/C++ languages needs to be compiled to a binary file which your host machine can run. In
+              Contrast, there are interpreted languages that doesn't need to be compiled but needs an interpreter at runtime
+              to execute the program. One of such languages that is popular is Python.
+            </p>
+
+            <h5>Why do we need a compiler?</h5>
+            <p>
+              We as human write programs that are human readable, but they are not machine readable. Computers only understand 
+              basic instructions written in 1's and 0's. Therefore, if we want our program to run, we need a helper tool to translate
+              human-readable code (C/C++ code) to machine code (Binary Executable). Compiler is the one who does the job. In C, we use
+              "gcc" as our compiler. In C++, we use "g++" as our compiler.
+            </p>
+
+            <h5>How to compile our codes?</h5>
+            <p>
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- /container -->
+  </main>
+
+  <footer style="margin-bottom: 5%; margin-top: 5%;">
+    <hr>
+    <div style="text-align: center; padding-top: 30px;">
+      <p style="color: gray;">&copy; 2020 <a href="https://github.com/Louis-He/C_testing" target="_blank">Hello, C!
+          project</a></p>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 
 </body>
+
 </html>
